@@ -1,4 +1,4 @@
-package Collection;
+package Collection.List.LinkedList;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -26,22 +26,13 @@ public class Linkedlist {
 //                list.addLast("TestUser");
 //                list.addFirst("TestUser");
 
-
-
-
-
-
+//---------------------------------------------------------------------------------------------
 // Sual-2:      LinkedList sinfində first və last elementləri necə əldə edə bilərsən?
 //Cavab-2:
             String firstElement = list.getFirst();
             String lastElement = list.getLast();
 
-
-
-
-
-
-
+//---------------------------------------------------------------------------------------------
 //Sual-3:     LinkedList-də middle elementini tapmaq üçün hansı optimal üsuldan istifadə etmək olar?
 //Cavab-3:      two pointer technique istifade ede bilerik
         LinkedList<Integer> list1 = new LinkedList<>();
@@ -57,6 +48,7 @@ public class Linkedlist {
 //        Integer middleElement = findMiddleElement(list1);
 //        System.out.println("Question 3--> Middle element: " + middleElement);
 
+//---------------------------------------------------------------------------------------------
 
 //Sual-4:      Iterator ilə Keçid (Traversing)
 //Cavab-4:
@@ -90,9 +82,20 @@ public class Linkedlist {
                 iterator1.remove();  // Sonuncu next() ilə çağırılmış elementi silir
             }
         }
-
         // Yenidən siyahını çıxışa verək
         System.out.println("Siyahıdan sonra: " + list2);
+
+//---------------------------------------------------------------------------------------------
+//Sual-5:      LinkedList-də necə dövrlü keçid (circular linked list) yarada bilərik?
+//Cavab-5:
+        CircularLinkedList list3 = new CircularLinkedList();
+
+        list3.add(1);
+        list3.add(2);
+        list3.add(3);
+        list3.add(4);
+
+        list3.printList(); // Çıxış: 1 2 3 4
     }
 
 
