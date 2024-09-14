@@ -1,0 +1,39 @@
+Təyinat:           HashSet, Set interfeysini implementasiya edir və elementlərin
+                   təkrarlanmadan saxlanması üçün istifadə olunur.
+                   HashSet elementləri hash kodlarına əsaslanaraq saxlayır,
+                   bu da axtarış, əlavə etmə və silmə əməliyyatlarını sürətli edir.
+
+İmplementasiya:   HashSet, HashMap-in daxili bir implementasiyası ilə işləyir.
+                  Hər bir element HashMap-də bir açar (key) kimi saxlanılır,
+                  dəyər (value) isə null ola bilər.
+                  (Qısaca arxa planda HashMap istifadə olunur)
+
+Əsas Xüsusiyyətlər
+
+    |----> HashSet yalnız unikal elementləri saxlayır.
+          Əgər eyni element əlavə edilsə, əvvəlki element dəyişdirilməz
+          və add() metodu false qaytarır.
+
+    |----> HashSet elementləri sıralamır.
+          Elementlərin əlavə olunduğu ardıcıllığı təmin etmir.
+
+    |----> Performans:
+           - Əlavə etmə: O(1)
+           - Silmə: O(1)
+           - Axtarış:
+
+    |----> Load factor : HashSet-in load factor-u 75%-dir.
+           Yəni HashSet-in 75%-i dolduqda onun ölçüsü 2 qat artırılır.
+
+    |----> HashSet paralel tasklar-da thread-safe-i təmin etmir.
+
+Metodlar:
+
+a)add(E e): Yeni bir element əlavə edir. Əgər element artıq varsa,
+            heç bir dəyişiklik etməz.
+b)remove(Object o): Müəyyən bir elementi silir.
+c)contains(Object o): Müəyyən bir elementin Set-də olub olmadığını yoxlayır.
+d)size(): Set-dəki elementlərin sayını qaytarır.
+e)clear(): Set-dəki bütün elementləri silir.
+
+
