@@ -1,0 +1,43 @@
+1.  İkitərəfli işləmə: ArrayDeque həm başdan, həm də sondan element əlavə etmək
+    və silmək imkanını verir.
+
+2.  Sürət: ArrayDeque, LinkedList-dən daha sürətlidir, çünki o, massivə əsaslanır
+    və minimal əlavə xərclər yaradır.
+
+3.  Null dəyərlər: ArrayDeque-də null dəyər saxlamaq mümkün deyil.
+
+4.  Dynamic Array: ArrayDeque elementlər əlavə olunduqca avtomatik olaraq genişlənən
+    bir massiv əsasında qurulub.
+
+5.  Stack və Queue funksionallığı: ArrayDeque həm Stack (push, pop) kimi, həm də Queue
+    (offer, poll) kimi işləyə bilər.
+
+6. Metodlar:
+
+    Element Əlavə etmək--->
+    a)addFirst(E e):   Baş tərəfə element əlavə edir.
+    b)addLast(E e):    Sona element əlavə edir.
+    c)offerFirst(E e): Baş tərəfə element əlavə edir,
+                       amma əgər yer olmadıqda xətaya səbəb olmur.
+    d)offerLast(E e):  Sona element əlavə edir, yer olmadıqda xətaya səbəb olmur.
+
+    Element Silmək--->
+    a)removeFirst(): Başdakı elementi silir,
+                     əgər boşdursa,NoSuchElementException atır.
+    b)removeLast():  Sondakı elementi silir,
+                     əgər boşdursa,NoSuchElementException atır.
+    c)pollFirst():   Başdakı elementi silir, əgər boşdursa, null qaytarır.
+    d)pollLast():    Sondakı elementi silir, əgər boşdursa, null qaytarır.
+
+
+    Element Oxumaq--->
+    a)getFirst(): Başdakı elementi qaytarır, lakin silmir.
+    b)getLast(): Sondakı elementi qaytarır, lakin silmir.
+    c)peekFirst(): Başdakı elementi qaytarır, lakin boş olarsa null qaytarır.
+    d)peekLast(): Sondakı elementi qaytarır, lakin boş olarsa null qaytarır.
+
+    Stack Metodları--->
+    ArrayDeque həm də stack kimi işlədilə bilər:
+
+    a)push(E e): Baş tərəfə element əlavə edir (stack üçün push).
+    b)pop(): Başdakı elementi silir və qaytarır (stack üçün pop).
