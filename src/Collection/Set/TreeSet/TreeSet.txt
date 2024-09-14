@@ -1,0 +1,41 @@
+Sıralama --->
+            TreeSet, elementləri sıralanmış qaydada saxlayır. Bu qayda ya təbii sıralama
+            (məsələn, Integer, String və s.), ya da bir komparator vasitəsilə müəyyənləşdirilir.
+
+Unikallıq --->
+            Set kimi, TreeSet təkrar elementləri saxlamır.
+
+Balanslaşdırılmış Ağaç --->
+             TreeSet, balanslaşdırılmış ağaç strukturunu istifadə edir (əsasən Red-Black ağacları).
+
+Elementlərin sürətli tapılması və sıralanması --->
+             Bu ağaç strukturu sayəsində elementlər arasında axtarış, əlavə və silmə
+             əməliyyatları O(log n) vaxt mürəkkəbliyi ilə həyata keçirilir.
+
+Null dəyəri ---> TreeSet-də null dəyəri saxlamaq mümkün deyil.
+                 Çünki sıralama əməliyyatları zamanı null dəyəri müqayisə etmək mümkün olmur.
+
+Əsas Metodlar --->
+                1) add(E e): Elementi set-ə əlavə edir. Əgər element artıq mövcuddursa, əlavə olunmur.
+                2) remove(Object o): Verilən elementi set-dən silir.
+                3) contains(Object o): Verilən elementin set-də olub-olmadığını yoxlayır.
+                4) first(): Set-dəki ən kiçik elementi qaytarır.
+                5) last(): Set-dəki ən böyük elementi qaytarır.
+                6) pollFirst(): Ən kiçik elementi set-dən çıxarır və həmin elementi qaytarır.
+                7) pollLast(): Ən böyük elementi set-dən çıxarır və həmin elementi qaytarır.
+                8) higher(E e): Verilən elementdən böyük olan ilk elementi qaytarır.
+                9) lower(E e): Verilən elementdən kiçik olan ilk elementi qaytarır.
+                10) isEmpty(): Set-in boş olub-olmadığını yoxlayır.
+                11) size(): Set-də neçə element olduğunu qaytarır.
+
+Case --->
+               1) Bir mağaza tətbiqində qiymətə görə sıralanmış məhsulları saxlamaq və qiymət aralığında
+                 axtarış etmək lazım gəlir. (ProductTreeSet.java faylinda nümunə izah olunub)
+               2) Tarixlər Arasında Axtarış:
+                  Məsələn, bir proqramda tədbirlərin tarixə görə sıralanmış siyahısı saxlanılır və müəyyən
+                  bir tarixdən sonrakı ilk tədbir axtarılır (EventTreeSetExample nümunəsində izah olunub).
+Time complexity --->
+                1) (add()): O(log n)
+                2) (remove()): O(log n)
+                3)  (contains()): O(log n)
+                4) Minimum/Maksimum element tapmaq (first()/last()): O(1)

@@ -20,7 +20,7 @@ Təyinat:           HashSet, Set interfeysini implementasiya edir və elementlə
     |----> Performans:
            - Əlavə etmə: O(1)
            - Silmə: O(1)
-           - Axtarış:
+           - Axtarış: O(1)
 
     |----> Load factor : HashSet-in load factor-u 75%-dir.
            Yəni HashSet-in 75%-i dolduqda onun ölçüsü 2 qat artırılır.
