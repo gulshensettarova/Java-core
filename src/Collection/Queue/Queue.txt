@@ -1,20 +1,23 @@
-QUEUE - FIFO (First In, First Out) prinsipi ilə işləyir
+1. QUEUE - FIFO (First In, First Out) prinsipi ilə işləyir
 
+2. public interface Queue<T> extends Collection<T>
 
-public interface Queue<T> extends Collection<T>
+3.Metodlar:
+---add(E e)--> Elementi sıraya əlavə edir. Element sıranın arxasına əlavə olunur.
+---offer(E e)--> add metoduna bənzəyir, lakin element əlavə edilə bilmədikdə false döndərə bilər.
+---remove()--> İlk elementi çıxarır və qaytarır. Əgər sırada heç bir element yoxdursa, NoSuchElementException atır.
+---poll()--> İlk elementi çıxarır və qaytarır, lakin sırada heç bir element yoxdursa, null qaytarır.
+---peek()--> İlk elementi baxır, lakin çıxarmır. Əgər sırada heç bir element yoxdursa, null qaytarır.
+---isEmpty()--> Sıra boşdursa true, yoxsa false qaytarır.
 
-add(E e): Elementi sıraya əlavə edir. Element sıranın arxasına əlavə olunur.
-offer(E e): add metoduna bənzəyir, lakin element əlavə edilə bilmədikdə false döndərə bilər.
-remove(): İlk elementi çıxarır və qaytarır. Əgər sırada heç bir element yoxdursa, NoSuchElementException atır.
-poll(): İlk elementi çıxarır və qaytarır, lakin sırada heç bir element yoxdursa, null qaytarır.
-peek(): İlk elementi baxır, lakin çıxarmır. Əgər sırada heç bir element yoxdursa, null qaytarır.
-isEmpty(): Sıra boşdursa true, yoxsa false qaytarır.
-
-Queue Növləri
+4.Queue Növləri:
 Java-da Queue interfeysini müxtəlif yollarla implementasiya edən bir neçə sinif var:
 
-LinkedList:        Queue interfeysini implementasiya edir və həm FIFO, həm də LIFO (Last In, First Out) funksiyalarını təmin edir.
+a)LinkedList-->Queue interfeysini implementasiya edir və həm FIFO,
+    həm də LIFO (Last In, First Out) funksiyalarını təmin edir.
 
-PriorityQueue:     Elementləri təyin olunmuş prioritetə görə sıralayır. Minimum və ya maksimum prioritetə görə çıxarır.
+b)PriorityQueue-->Elementləri təyin olunmuş prioritetə görə sıralayır.
+    Minimum və ya maksimum prioritetə görə çıxarır.
 
-ArrayDeque:        Dəyişkən ölçülü array ilə implementasiya edilən bir sıra növüdür. FIFO prinsipi ilə çalışır.
+c)ArrayDeque-->Dəyişkən ölçülü array ilə implementasiya edilən bir sıra növüdür.
+    FIFO prinsipi ilə çalışır.

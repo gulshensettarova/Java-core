@@ -1,0 +1,76 @@
+ 1. LinkedList Java Collections Framework-də mövcud olan ikiqat bağlı siyahı
+    (doubly linked list) strukturu olan bir verilənlər toplusudur.
+    O, elementləri ardıcıllıqla saxlayır və hər bir element digər
+    elementlərlə əlaqələndirilir. LinkedList həm List (ardıcıllıqla saxlayır),
+    həm də Deque (növbə) interfeysini dəstəkləyir, beləliklə, həm siyahı kimi,
+    həm də iki tərəfli növbə kimi istifadə edilə bilər.
+
+ 2. LinkedList, elementlərin ardıcıl saxlandığı və hər bir elementin əvvəlki
+    və növbəti elementlə bağlı olduğu ikili bağlı siyahı (doubly linked list) strukturu
+    ilə işləyir.
+
+ 3. LinkedList-də elementlərə keçid birbaşa indekslə aparılmır.
+    Elementləri tapmaq üçün siyahı boyunca bir-bir keçid edilir
+    (yəni birinci elementdən başlayaraq, növbəti elementə keçərək indeksdəki
+    element tapılır).O(n) vaxt mürəkkəbliyi ilə indeks əsasında keçid edir.
+    Bu, ArrayList-dən fərqlənir, çünki ArrayList-də keçid O(1) vaxtda mümkündür.
+
+ 4. LinkedList-də elementin silinməsi asanlıqla baş verir. Məsələn,
+    ortadakı bir elementi sildikdə, həmin elementin əvvəlki və
+    növbəti işarələri bir-birinə bağlanır, beləliklə həmin element siyahıdan çıxarılır.
+    Silinmə əməliyyatı zamanı heç bir elementi yenidən təşkil etmək lazım olmadığı üçün
+    O(1) mürəkkəbliyi ilə həyata keçirilir (siyahının başlanğıcında və ya sonunda silmə
+    əməliyyatı üçün).
+
+
+ 5. İterator interface-i və Linkedlist:
+    Iterator collection-larda elementlər üzərində addım-addım keçid etməyi təmin
+    edən bir interfeysdir. İterator bizə verilənlər toplusu üzərində dövr etmək
+    və elementləri bir-bir oxumaq, həmçinin silmək imkanı verir.
+    Java-da LinkedList istifadə edərkən elementlər arasında keçid etmək üçün
+    Iterator və ya ListIterator istifadə edə bilərik. İterator LinkedList-də
+    saxlanılan elementləri bir-bir keçməyə kömək edir.
+    Iterator interfeysi aşağıdakı əsas metodları təmin edir:
+
+    a)hasNext(): İteratorun növbəti elementi olub-olmadığını yoxlayır.
+                 Əgər varsa, true, yoxdursa false qaytarır.
+    b)next():    İteratorun növbəti elementini qaytarır və həmin element
+                 üzərində mövqeyini irəliyə çəkir.
+    c)remove():  Sonuncu qaytarılan elementi silir (iteratorun next() metodu
+                 ilə qaytardığı element).
+
+ 6. ListIterator və LinkedList :
+    ListIterator, Java-da verilənlər toplusu (collection) üzərində irəli
+    və geri istiqamətdə keçid (traversing) etməyə imkan verən xüsusi bir
+    iterator növüdür. Bu iterator yalnız List interfeysini implement edən
+    kolleksiyalarla işləyir. Bu, Iterator interfeysindən daha güclü və çox
+    yönlüdür, çünki ListIterator həm irəli, həm də geri keçid imkanı, həmçinin
+    verilənlər toplusunda dəyişiklik etmək üçün əlavə metodlar təqdim edir.
+
+    Metodlar :
+    a)boolean hasNext()---> İrəli istiqamətdə keçid üçün növbəti elementin
+                            olub-olmadığını yoxlayır. Əgər varsa, true qaytarır,
+                            yoxdursa false.
+
+    b)E next()--->  Növbəti elementi qaytarır və iteratoru irəliyə bir addım çəkir.
+
+    c)boolean hasPrevious()--->  Geri istiqamətdə keçid üçün əvvəlki elementin
+                                 olub-olmadığını yoxlayır. Əgər varsa, true qaytarır.
+
+    d)E previous()--->  Əvvəlki elementi qaytarır və iteratoru geriyə bir addım çəkir.
+
+    e)int nextIndex()--->  İrəli istiqamətdə dövr zamanı növbəti elementin indeksini
+                           qaytarır. Əgər keçid sona çatıbsa, -1 qaytarır.
+
+    f)int previousIndex()--->  Geri istiqamətdə keçid zamanı əvvəlki elementin indeksini
+                               qaytarır. Əgər iterator başlanğıcda yerləşirsə, -1 qaytarır.
+
+    g)void remove()--->  Sonuncu oxunan elementi silir. Bu metod əvvəlcə next() və ya
+                         previous() ilə bir element oxunduqdan sonra istifadə oluna bilər.
+
+    h)void set(E e)--->  Sonuncu qaytarılan elementi (ya next(), ya da previous() ilə
+                         qaytarılan) verilmiş dəyərlə əvəz edir.
+
+    k)void add(E e)--->  Mövcud vəziyyətdə iteratorun cari mövqeyinə yeni bir element
+                         əlavə edir. Yeni element iteratorun mövqeyindən əvvəl yerləşdirilir və
+                         iterator bu yeni elementin ardından irəli hərəkət edir.

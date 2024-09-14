@@ -5,12 +5,7 @@ import java.util.LinkedList;
 
 //for interview
 public class Linkedlist {
-    // LinkedList, Java Collections Framework-də bir sinifdir və List və Deque interfeyslərini implement edir.
-    // LinkedList, elementlərin ardıcıl saxlandığı və hər bir elementin əvvəlki və növbəti elementlə bağlı olduğu ikili bağlı siyahı (doubly linked list) strukturu ilə işləyir.
-    //LinkedList-də elementlərə keçid birbaşa indekslə aparılmır. Elementləri tapmaq üçün siyahı boyunca bir-bir keçid edilir(yəni birinci elementdən başlayaraq, növbəti elementə keçərək indeksdəki element tapılır).
-    //O(n) vaxt mürəkkəbliyi ilə indeks əsasında keçid edir. Bu, ArrayList-dən fərqlənir, çünki ArrayList-də keçid O(1) vaxtda mümkündür.
-    //LinkedList-də elementin silinməsi asanlıqla baş verir. Məsələn, ortadakı bir elementi sildikdə, həmin elementin əvvəlki və növbəti işarələri bir-birinə bağlanır, beləliklə həmin element siyahıdan çıxarılır.
-    //Silinmə əməliyyatı zamanı heç bir elementi yenidən təşkil etmək lazım olmadığı üçün O(1) mürəkkəbliyi ilə həyata keçirilir (siyahının başlanğıcında və ya sonunda silmə əməliyyatı üçün).
+
     public static void main(String[] args) {
         LinkedList<String> list = new LinkedList<>();
         list.add("userTest");
@@ -86,7 +81,7 @@ public class Linkedlist {
         System.out.println("Siyahıdan sonra: " + list2);
 
 //---------------------------------------------------------------------------------------------
-//Sual-5:      LinkedList-də necə dövrlü keçid (circular linked list) yarada bilərik?
+//Sual-5: LinkedList-də necə dövrlü keçid (circular linked list) yarada bilərik?
 //Cavab-5:
         CircularLinkedList list3 = new CircularLinkedList();
 
