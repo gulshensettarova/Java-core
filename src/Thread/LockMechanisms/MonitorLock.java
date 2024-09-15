@@ -7,7 +7,7 @@ public class MonitorLock {
     //Əgər this yoxda öz yaratdigimiz metod istifade edirikse butun metodlarin eyni obyekt ile lock-landigina diqqet etmek lazimdir
     private final Object lock = new Object();
 
-    // Sinxronizasiya olunmuş metod
+    // Sinxronizasiya olunmuş block
     public void deposit(int amount) {
         synchronized(lock) {  // Eyni lock obyekti ilə sinxronizasiya
             balance += amount;
@@ -15,7 +15,7 @@ public class MonitorLock {
     }
     // Sinxronizasiya olunmuş blok
     public void withdraw(int amount) {
-        synchronized(lock) {  // Bu obyektin monitor kilidini əldə edir
+        synchronized(lock) {  //  Eyni lock obyekti ilə sinxronizasiya
             balance -= amount;
         }
     }

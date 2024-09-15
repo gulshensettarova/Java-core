@@ -55,6 +55,15 @@
         Məsələn, iki aşpazın olduğunu düşün. Bir aşpaz yemək bişirir, digər aşpaz isə eyni anda salat hazırlayır.
         Bu vəziyyət Parallelismdir, çünki hər iki tapşırıq eyni vaxtda icra olunur və resurslar paralel istifadə olunur.
 
+Thread Safe ---->
+        Thread Safe birdən çox thread-in eyni bir mənbəyə müraciəti zaman ortaya çıxan uyğunsuzluqlardır .
+        Kodumuzun thread safe olması üçün aşağıdakı şərtlərdən ən azı biri ödənməlidir :
+
+        1. İmmutable class yaratmaq
+        2. Synchronized-dan istifadə etmək
+        3. Reentrant Lock-dan istifadə etmək
+        4. Bir methoda eyni bir parametri verdikdə hər dəfə eyni output-u almaq
+
 
 Race condition nədir? -------------->
 
@@ -103,6 +112,15 @@ b)Monitor Locks nədir?
 ----> Java-da hər obyektin daxili bir monitoru vardır. Bu monitorun kilidi müəyyən kod bloku və ya metod sinxronizasiya
       olunmuş şəkildə işlədikdə aktivləşir. Yəni, bir thread monitor kilidini əldə edəndə, digər thread-lər həmin monitoru
       əldə edə bilmir və kodun həmin bölməsini icra etmək üçün gözləməli olur.
+
+
+Reentrant Lock nədir?
+
+---->Java-dakı java.util.concurrent.locks paketində təqdim olunan bir sinifdir
+---->lock() metodu vasitəsilə klid əldə edilir, unlock() metodu vasitəsilə klid azad edilir.
+     Bu metodlar try-finally blokunda istifadə olunur ki, lock hər zaman azad edilsin, hətta istisna halında belə.
+---->Synchronized  bloklardan fərqli olaraq klidin açılmasını və buraxılmasını özümüz təyin edirik.
+
 
 
 
