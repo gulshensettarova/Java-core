@@ -1,0 +1,56 @@
+1. MultiThreading vs MultiProcessing vs MultiProgramming vs MultiTasking?------>
+
+          a) MultiThreading- Java-da ən geniş istifadə olunan paralel işləmə mexanizmi MultiThreadingdir.
+                             Java-da ipliklər (Thread sinifi və ya ExecutorService) eyni proses daxilində paralel
+                             işləyən birdən çox tapşırığın həyata keçirilməsinə imkan verir. Thread-lər eyni yaddaş
+                             sahəsini paylaşır və daha yüngül olduğu üçün MultiProcessing-dən daha çevikdir.
+
+          b) MultiProcessing -MultiProcessing, Java-da birdən çox prosesin fərqli CPU-larda işlədilməsi deməkdir.
+                              Əməliyyat sistemi bu prosesləri müxtəlif CPU-lar arasında bölə bilər.
+                              Hər bir Java proqramı müstəqil bir proses kimi işləyə bilər, amma bu proseslər
+                              fərqli JVM-lər üzərində işləyir.
+
+          c) MultiProgramming -Java-da bir JVM (Java Virtual Machine) birdən çox proqramı işlədə bilər.
+                               Hər bir Java proqramı fərqli bir prosesdir və bu proseslər paralel işləmək
+                               üçün əməliyyat sistemi tərəfindən idarə olunur.
+
+          d) MultiTasking  -Java-da birdən çox proses və ya thread icra olunaraq MultiTasking həyata keçirilir.
+                            Bir JVM bir neçə Java proqramını idarə edə bilər və ya bir proqram daxilində bir
+                            neçə tapşırığı paralel icra edə bilər. Java-da əsas MultiTasking mexanizmi
+                            threads istifadə edir.
+
+          Sxematik təsvir: |--- MultiProgramming — birdən çox Java proqramını eyni yaddaşa yükləyir.
+
+                               |--- MultiTasking — bir JVM-də birdən çox tapşırıq icra edir
+                                    (MultiThreading istifadə edə bilər).
+
+                                    |--- MultiProcessing — fərqli CPU-larda birdən çox proses
+                                         (hər proses fərqli JVM-lərdə işləyə bilər).
+
+                                            |--- MultiThreading — hər proses daxilində birdən çox thread icra olunur.
+
+2. Concurrency və Parallelism nədir? Onlar arasındakı fərqlər nələrdir?
+
+        Concurrency  nədir? --->
+        Concurrency, bir proqramın eyni zamanda birdən çox tapşırıq üzərində işləmə qabiliyyətidir,
+        amma bu tapşırıqlar mütləq həqiqi olaraq eyni anda icra olunmaya bilər. Bu o deməkdir ki, tapşırıqlar
+        bir-birini qısa müddətlər üçün "dayandıraraq" icra olunur. Yəni Concurrency ilə bir tapşırıq bitmədən
+        digərinə keçilir və bu keçid o qədər sürətli olur ki, sanki tapşırıqlar eyni anda işləyirmiş kimi görünür.
+        Amma əslində, bu tapşırıqlar bir CPU-da növbəli şəkildə icra olunur. Bu növbəli keçid mexanizmi resurslardan
+        effektiv istifadəni təmin edir.
+
+        Misal ilə izah:
+        Təsəvvür et ki, sənin bir aşpazın var və o həm yemək bişirir, həm də salat hazırlayır. Aşpaz yeməyi bişirərkən
+        qazanı qaynamağa qoyub, o vaxtda salat kəsməyə başlayır. Sonra yenidən yeməyi qarışdırmağa qayıdır. Yəni, aşpaz
+        eyni anda iki işlə məşğul olmur, amma çox sürətli keçidlər edir. Bu vəziyyət Concurrency ilə bənzəyir.
+
+        Java-da Concurrency təmin edən mexanizmlər (məsələn, Thread, Runnable, ExecutorService) tapşırıqları
+        bu şəkildə növbə ilə icra edə bilər. Bir nüvə olduğu təqdirdə, birdən çox thread eyni anda işləmir.
+        Hər bir thread qısa müddət ərzində işləyir, sonra dayandırılıb digəri işə başlayır.
+
+        Parallelism nədir? --->
+        Parallelism isə birdən çox tapşırığın eyni vaxtda, yəni eyni anda bir neçə CPU və ya nüvə (core) üzərində
+        həqiqi şəkildə icra olunmasını nəzərdə tutur. Paralel işləmə üçün çox nüvəli və ya çox CPU-lu sistemlər
+        lazımdır, çünki tapşırıqlar tam olaraq eyni vaxtda yerinə yetirilir.
+        Məsələn, iki aşpazın olduğunu düşün. Bir aşpaz yemək bişirir, digər aşpaz isə eyni anda salat hazırlayır.
+        Bu vəziyyət Parallelismdir, çünki hər iki tapşırıq eyni vaxtda icra olunur və resurslar paralel istifadə olunur.
