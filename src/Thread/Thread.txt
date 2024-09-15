@@ -215,3 +215,33 @@
 
 
 
+11. ExecutorService
+
+   ---->  Java-da multi thread-lərlə işləmək üçün istifadə olunan bir interfeysdir və Java Concurrency Framework-in əsas komponentlərindən biridir.
+          O, task-ları (tapşırıqları) idarə etmək üçün daha sadə və effektiv bir yol təmin edir.
+   ---->  Əsas Xüsusiyyətlər və Faydalar:
+          1. Thread Pool Management -> ExecutorService thread-ləri dinamik olaraq idarə edir. Bu, çox sayda thread yaratmağı və idarə etməyi sadələşdirir,
+                                       çünki siz yeni thread-lər yaratmaq əvəzinə, mövcud thread-ləri istifadə edə bilərsiniz.
+                                       Thread pool-da bir neçə thread əvvəlcədən yaradılır və bunlar task-ları icra etmək üçün istifadə olunur.
+                                       Bu, resursların daha effektiv istifadəsini təmin edir.
+          2. Task Scheduling -> ExecutorService tapşırıqları müəyyən vaxtlarda və ya müəyyən aralıqlarla icra etmək üçün təyin etməyə imkan verir.
+                                Bu, müntəzəm və vaxtdan asılı tapşırıqları idarə etməyə kömək edir.
+          3. Future Interface -> ExecutorService tapşırıqların nəticələrini almaq üçün Future interfeysini təqdim edir. Future vasitəsilə bir tapşırığın nəticələrini əldə edə bilər,
+                                 tapşırığın tamamlanmasını gözləyə bilərsiniz və ya nəticəni əldə etmək üçün bloklaya bilərsiniz.
+          4.Graceful Shutdown -> ExecutorService-in düzgün və nəzakətli şəkildə bağlanmasını təmin edən bir üsuldur. Bu üsul yeni tapşırıqların qəbulunu dayandırır
+                                 və hazırda icra olunan tapşırıqları tamamlayaraq, bütün resursları sərbəst buraxır. Bu, proqramın və ya sistemin düzgün və etibarlı şəkildə bağlanmasını təmin edir.
+
+   ----> Əsas Metodlar:
+        1. submit() -> Tapşırığı icra etmək üçün ExecutorService-ə təqdim edir. Bu metod Future obyektini qaytarır.
+        2. invokeAll() -> Bir neçə tapşırığı eyni anda icra edir və nəticələri List<Future> obyektində qaytarır.
+        3. invokeAny() ->Bir neçə tapşırıqdan ilk tamamlanmış tapşırığın nəticəsini qaytarır.
+        4. shutdown() -> ExecutorService-in yeni tapşırıqları qəbul etməyi dayandırmasını təmin edir.
+        5. shutdownNow() ->ExecutorService-i dərhal bağlayır və icra olunmayan tapşırıqları ləğv edir.
+
+
+
+
+
+
+
+
