@@ -69,3 +69,40 @@ Race condition nədir? -------------->
           İkinci müştəri : 300+100
           Bu halda hesabdaki balance 350 və ya 400 görsənəcək (Threadlərin hansinin sonda işini bitirdiyindən asılı olaraq)
           Halbuki belə olmalı idi : 300+50+100 (və ya 300+100+50)
+
+
+Race condition-un qarşısını almaq üçün Lock mechanism-lər tədbiq olunur ---->
+     1) Atomic classes
+     2) Intrinsic Locks (Monitor Locks)-Bunlar synchronized bloklar və metodlarla təmin olunur.
+     3) ReentrantLock
+     4) Cycle Barier
+
+a)Atomik Əməliyyat Nədir?
+ -----> Bir dəyişən atomik elan edildikdə, hər hansı bir thread bu dəyişəni oxuduqda o
+        avtomatik bloklanır və thread-in işi bitənə qədər başqa thread-ın bu dəyişəni istifadə
+        etməsinə icazə vermir.Java-da atomik əməliyyatları təmin etmək üçün java.util.concurrent.atomic
+        paketində müxtəlif  siniflər mövcuddur. Bu siniflər atomik dəyişənlər üzərində əməliyyatlar aparmaq üçün xüsusi
+        alqoritmlərdən istifadə edirlər.
+        Nümunə :  private AtomicInteger balance = new AtomicInteger(1000);
+        Qeyd : custom class-larda AtomicReferance istifade edilir.
+        AtomicReference<Person> atomicPerson = new AtomicReference<>(new Person("Gulshan"));
+
+b)Monitor Locks nədir?
+----> Java-da monitor lock synchronized açar sözü ilə həyata keçirilir. synchronized açar sözü
+      iki şəkildə istifadə edilə bilər:
+      1.synchronized methods
+      2.synchronized blocks
+
+
+----> Monitor Locks (və ya sadəcə Monitors) Java-da çox istifadə olunan sinxronizasiya mexanizmidir
+      və hər bir obyekt üçün daxil olan daxili bir kilid (lock) kimi işləyir. Monitor kilidləri (locks)
+      Java-da thread-lər arası (multithreading) təhlükəsizliyi təmin etmək üçün istifadə olunur. Bir neçə
+      thread eyni obyekt üzərində işlədikdə, obyektin vəziyyətinin (state) dəyişikliyinin ardıcıl olmasını təmin
+      etmək üçün monitor kilidləri tətbiq edilir.
+
+----> Java-da hər obyektin daxili bir monitoru vardır. Bu monitorun kilidi müəyyən kod bloku və ya metod sinxronizasiya
+      olunmuş şəkildə işlədikdə aktivləşir. Yəni, bir thread monitor kilidini əldə edəndə, digər thread-lər həmin monitoru
+      əldə edə bilmir və kodun həmin bölməsini icra etmək üçün gözləməli olur.
+
+
+
