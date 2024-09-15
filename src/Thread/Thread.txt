@@ -140,5 +140,78 @@
    ----> release(): Thread icazəni sərbəst buraxır. Bu, digər gözləyən thread-lərə icazə almaq imkanı verir.
 
 
+8.Mutex nədir?
+
+   ---->Mutex çoxlu thread-lərin eyni resursa daxil olmasının qarşısını alır və bu məqsəd üçün sinxronizasiya
+        mexanizmləri təklif edir.
+   ---->Java-da Mutex rolunu synchronized blokları və ReentrantLock ilə oynamaq mümkündür.
+   ---->ReentrantLock daha çox çeviklik və əlavə funksiyalar təmin edir, məsələn, tryLock və lockInterruptibly
+        metodları, hansı ki, daha incə nəzarət və idarəetmə imkanı verir.
+
+9. Thread-lər necə yaradılır?
+    a) Thread classında extend etməklə --> Bu üsüldan istifadə etdikdə hər thread üçün ayrıca bir obyekt yaradılmalıdır.
+       Qeyd: Thread class-ı özü də Runnable interface-i implement edir. Ona görə də run() metodu override olunmalıdır.
+    b) Runnable interface-dən implement etməklə --> Burada ayrı-ayrı obyekt yaratmağa ehtiyac yoxdur.
+       Runnable interface-i daxilində olan run metodu override olunmalıdır.
+    c) Callable-interface-dən implement etməklə --> Burada ayrı-ayrı obyekt yaratmağa ehtiyac yoxdur.
+       Callable interface-i daxilində olan call metodu override olunmalıdır. run()-dan fərqli olaraq call()
+       metodu geriyə dəyər qaytaran metoddur.
+
+10.Terminlər ---->
+
+    a)  Ordering (Sıralama) --> multithreading və ya paralel proqramlaşdırma zamanı əmrlərin icra ardıcıllığını
+                                müəyyən edir. Java-da əmrlər ardıcıllıqla yazılsa da, optimallaşdırmalar, prosessorun iş prinsipi və ya
+                                Java Virtual Machine (JVM) səbəbindən əmrlər gözlənildiyi kimi sırayla icra olunmaya bilər. Bunun səbəbi,
+                                JVM-in performansı artırmaq üçün bəzi optimallaşdırmaları yerinə yetirməsidir. Bu optimallaşdırmalar proqramın
+                                görünən nəticəsini dəyişməsə də, əmrlərin hansı ardıcıllıqla icra olunduğunu dəyişə bilər.
+    b) As-if-serial Semantics --> Bu prinsip, tək bir thread-də əmrlərin ardıcıllığının dəyişdirilə biləcəyini,
+                                 amma bu dəyişikliklərin proqramın nəticəsinə təsir etməməsini təmin edir. Yəni, əmrlər paralel işlədilə və ya
+                                 optimallaşdırıla bilər, amma bu, sanki əmrlər ardıcıl icra olunmuş kimi bir nəticə verməlidir.
+
+       Necə təmin edilir?
+          |--> Visibility - Bir thread-də edilən dəyişikliklər digər thread-lərə zamanında görünməlidir.
+          |--> Atomicity - Dəyişikliklər bir anda və tam şəkildə görülməlidir.
+          |--> Ordering -  Əməliyyatlar gözlənilən ardıcıllıqla icra edilməlidir, yəni optimallaşdırmaların nəticə
+                           üzərində təsiri olmamalıdır.
+       Real case: Bir çox thread eyni resursu idarə etməyə çalışırsa (məsələn, bank hesabına giriş) və əmrlər düzgün sırada
+                  icra olunmazsa, pul transferləri səhv nəticələr verə bilər. Bu hallarda as-if-serial semantics təmin edilməlidir ki,
+                  əməliyyatlar doğru şəkildə icra olunsun.
+
+    c) sequential consistency --> çoxlu thread-lərin olduğu paralel proqramlaşdırmada vacib bir konsepsiyadır. Bu konsepsiya,
+                                 bütün əməliyyatların, fərqli thread-lərin daxil olduqları resurslar üzərində ardıcıl şəkildə işləməsini təmin edir.
+                                 Başqa sözlə, sequential consistency təmin edildikdə, əməliyyatlar hər bir thread-in daxilində elə icra olunmalıdır ki,
+                                 nəticə sanki əməliyyatlar ardıcıl icra olunmuş kimi görünsün.
+
+       Qeyd : Sequential consistency bir neçə thread-in resurslara eyni vaxtda müraciət etməsi hallarında ardıcıl uyğunluğu təmin edir.
+              As-if-serial semantics isə tək thread daxilində kodun optimallaşdırılsa belə, nəticənin dəyişməyəcəyini təmin edir.
+              Ordering prosessor səviyyəsində əməliyyatların necə icra olunduğunu və sıralamanın necə dəyişə biləcəyini nəzarət edir.
+
+    d) Visibiity --> Thread-lərin hər biri öz yaddaşında müəyyən dəyişənləri saxlayır (məsələn, CPU cache-də) və digər thread-lər
+                     həmin dəyişənlərin dəyərinin dəyişdiyini görməyə bilər. Bu səbəbdən, bir thread-də dəyişdirilən məlumat başqa bir thread
+                     tərəfindən oxunarkən köhnə dəyəri qaytarıla bilər. Visibility problemi, iki və ya daha çox thread-in sinxronizasiya olunmadan
+                     paylaşdığı verilənlərlə işləməsi zamanı yaranır. Volatile keyword-u ilə problem aradan qaldırılər.
+
+    e) Happens-before --> Bu anlayış, bir əməliyyatın digər əməliyyatdan əvvəl tamamlandığına zəmanət vermək üçün istifadə olunur.
+                          Thread-lərin paralel icrasında, bir əməliyyatın digərindən əvvəl yerinə yetirildiyini və nəticələrin
+                          bu qaydada göründüyünü təmin etmək üçün happens-before qaydaları tətbiq edilir.
+
+                          Happens-before nədir?
+                          Happens-before əlaqəsi iki əməliyyat arasında müəyyən edilir və aşağıdakıları təmin edir:
+
+                          1)Əgər bir əməliyyat digərindən əvvəl baş veribsə (happens-before münasibəti varsa), o zaman birinci əməliyyatın təsiri ikincidən əvvəl baş verəcək.
+                            Başqa sözlə, ilk əməliyyatın nəticələri ikincidən əvvəl bütün thread-lərə görünəcək.
+                          2)Əgər iki əməliyyat arasında happens-before əlaqəsi yoxdursa, bu, o əməliyyatların müəyyən bir sıralamada baş verməyəcəyini göstərir
+                            və hər bir thread-in gördüyü nəticələr fərqli ola bilər.
+
+                            Nə zaman istifadə olunur: Bir əməliyyatın (məsələn, bir obyektin yazılması) digər əməliyyatdan əvvəl yerinə yetirildiyinə əmin olmaq üçün.
+                            Təmin etmə yolları: synchronized bloklar, volatile dəyişənlər, ExecutorService kimi strukturda.
+
+    f) Safe Publication --> obyektin müxtəlif thread-lər arasında təhlükəsiz şəkildə paylaşılması və obyektin tam qurulmuş halının görünməsini təmin edən yanaşmadır.
+                            Obyektin heç bir thread üçün yarımçıq və ya səhv vəziyyətdə görünməməsini təmin edir.
+
+                            Nə zaman istifadə olunur: Obyektlərin tam qurulmuş vəziyyətdə digər thread-lər tərəfindən görünməsini təmin etmək üçün.
+                            Təmin etmə yolları: volatile, synchronized, final sahələr, thread-safe obyektlər.
+                            Real case: Konfiqurasiya obyektinin paylaşılması və ya obyekti başa çatmış vəziyyətdə bir çox thread arasında yaymaq.
+
 
 
