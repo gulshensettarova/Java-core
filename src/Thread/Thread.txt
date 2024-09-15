@@ -54,3 +54,18 @@
         lazımdır, çünki tapşırıqlar tam olaraq eyni vaxtda yerinə yetirilir.
         Məsələn, iki aşpazın olduğunu düşün. Bir aşpaz yemək bişirir, digər aşpaz isə eyni anda salat hazırlayır.
         Bu vəziyyət Parallelismdir, çünki hər iki tapşırıq eyni vaxtda icra olunur və resurslar paralel istifadə olunur.
+
+
+Race condition nədir? -------------->
+
+       Yuxarda qeyd olunduğu kimi multithreading zamanı thread-lər eyni yaddaş sahəsini paylaşır.
+       Bu da bəzi problemlərə səbəb olurki, bu problemlərdən biri də race condition-dur.
+       Race condition- thread-lər yaddaş sahəsindəki dəyişənə eyni anda müraciət edib onu dəyişməyə çalışır.
+       Məsələn : Bank hesabında 300 AZN pul var. 2 müxtəlif istifadəçi bu balansa pul transfer edir.
+       Birinci müştəri balansa 50 AZN, ikinci isə 100 AZN pul transfer edir. Bu prossesdə hər iki thread
+       balance dəyişəninə eyni anda müraciət etdiyi üçün 300 qiymətini götürür və əlavə olunacaq dəyər bu qiymətin
+       üzərinə gəlir:
+          Birinci müştəri : 300+ 50
+          İkinci müştəri : 300+100
+          Bu halda hesabdaki balance 350 və ya 400 görsənəcək (Threadlərin hansinin sonda işini bitirdiyindən asılı olaraq)
+          Halbuki belə olmalı idi : 300+50+100 (və ya 300+100+50)
