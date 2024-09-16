@@ -239,7 +239,7 @@
         5. shutdownNow() ->ExecutorService-i dərhal bağlayır və icra olunmayan tapşırıqları ləğv edir.
 
 
-
+--------------------Yarimciq----------------------------------------------
 
 
 12. Process  vs Thread ---->
@@ -287,6 +287,33 @@
            -- JDK 1.2 versiyasından etibarən Java Green Threads-i tərk etdi və Native Threads mexanizminə keçdi. Native Threads,
              əməliyyat sisteminin threading mexanizmi ilə işlədiyi üçün daha səmərəli və yüksək performanslıdır, xüsusilə çox nüvəli
              prosessorlar üçün uyğundur. Bu səbəbdən, hazırkı Java versiyalarında Green Threads artıq istifadə olunmur.
+
+14.Deadlock və Livelock ---->
+        Deadlock və Livelock paralel proqramlaşdırmada çox rast gəlinən problemlərdir və bu problemlər çoxsaylı thread-lər və ya proseslər arasında qarşılıqlı təsir zamanı meydana çıxır.
+
+        ---> DeadLock : Deadlock, iki və ya daha çox thread-in bir-birini gözləyərək sonsuz şəkildə bloklandığı vəziyyətdir.
+                        Yəni, hər bir thread müəyyən bir resursa malikdir və başqa bir resursa ehtiyacı var, amma o resurs da digər thread tərəfindən bloklanmışdır.
+                        Nəticədə, heç bir thread işini tamamlayıb irəliləyə bilmir və hər biri gözləmə vəziyyətində qalır.
+
+        --> Deadlock-un baş vermə şərtləri:
+            Deadlock-un baş verməsi üçün aşağıdakı 4 şərtin eyni vaxtda olması lazımdır (bu şərtlər "Coffman conditions" adlanır):
+
+          -  Mutual Exclusion : Resurslar yalnız bir thread tərəfindən eyni zamanda istifadə edilə bilər.
+          -  Hold and Wait : Bir thread bir resursu saxlayır və eyni zamanda başqa bir resursa ehtiyac duyur və gözləyir.
+          -  No Preemption: Resurslar zorla geri alına bilməz, yalnız onu saxlayan thread buraxa bilər.
+          -  Circular Wait : İki və ya daha çox thread bir-birindən resurs gözləyir, bu da dövr yaratmış olur (Thread A, Thread B-dən, Thread B isə Thread A-dan resurs gözləyir).
+
+         ---> Livelock : Livelock, thread-lərin davamlı şəkildə bir-birinin qarşısını almaq üçün fəaliyyət göstərdiyi, amma heç bir irəliləyiş
+                         əldə etmədiyi bir vəziyyətdir. Bu, thread-lərin "işləyirmiş kimi" görünməsi, lakin əslində heç bir işin tamamlanmaması halıdır.
+                         Livelock-da thread-lər bloklanmır, amma işlərini tamamlaya bilmirlər, çünki vəziyyəti düzəltməyə çalışarkən davamlı olaraq öz vəziyyətlərini dəyişirlər.
+
+             Livelock misalı :
+                            Bir misal olaraq, iki şəxs düşünək ki, hər biri dar bir keçiddə bir-birinə yol verməyə çalışır.
+                            Birinci şəxs sağa gedir, ikinci şəxs də sağa gedir. Sonra birinci şəxs sola gedir, ikinci şəxs də sola gedir
+                            və beləliklə, hər dəfə bir-birindən qaçmağa çalışırlar, lakin heç vaxt keçidi keçə bilmirlər.
+
+              Livelock vəziyyətində hər iki thread işləyir, amma bir-birinin fəaliyyətinə uyğun olaraq hər dəfə fərqli bir qərar verirlər və nəticədə
+              heç biri işini tamamlayıb irəliləyə bilmir.
 
 
 
