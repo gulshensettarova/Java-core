@@ -242,6 +242,51 @@
 
 
 
+12. Process  vs Thread ---->
+
+    Proccess --> Proses, müəyyən bir proqramın icra olunduğu müstəqil bir iş vahididir. Proqram işlədiyi zaman bir proses yaranır və onun icrasını təmin edir. Proseslər arasında bir-birindən müstəqillik var və hər prosesin öz yaddaş sahəsi olur.
+                 Java-da hər dəfə bir proqram başladığınız zaman yeni bir proses yaranır.
+    Thread --> Thread isə bir prosesin daxilində icra edilən iş axınıdır. Yəni, bir proses bir neçə thread-ə bölünə bilər və onlar eyni yaddaş sahəsini paylaşa bilərlər. Thread-lər prosesi daha səmərəli idarə etmək üçün çoxlu paralel işlər yerinə yetirə bilər.
+           ->  Yaddaş paylaşımı :  Thread-lər eyni proses daxilində icra olunduğundan, eyni yaddaş sahəsini və resursları paylaşırlar.
+           ->  İcra müddəti :  Bir prosesin müxtəlif hissələri eyni anda paralel olaraq işləyə bilər (multithreading). Bu, sistemin resurslarını daha yaxşı istifadə etməyə imkan verir.
+           ->  Yüngül icra vahidi : Thread-lər prosesdən daha yüngüldür və əməliyyat sisteminin idarəetmə xərcləri daha azdır.
+
+
+13. Green Threads və Native Threads  ---->
+        Green Threads -->
+            Green Threads əməliyyat sistemi tərəfindən deyil, proqramın və ya JVM-in (Java Virtual Machine) özü tərəfindən idarə olunan virtual (yəni proqram səviyyəsində) thread-lərdir.
+            Bu mexanizm çoxlu thread-lərin bir əməliyyat sistemi prosesində icra olunmasına imkan verir və hər bir green thread-in idarə olunması əməliyyat sistemindən asılı olmur.
+
+        --> Green Threads-in bəzi xüsusiyyətləri:
+           -- Əməliyyat sistemi müstəqilliyi: Əməliyyat sistemi səviyyəsində deyil, proqram səviyyəsində icra olunur.
+           -- Multithreading əməliyyat sistemindən asılı deyil: Hətta əməliyyat sistemi multithreading dəstəkləməsə belə, Green Threads ilə paralel işlər görülə bilər.
+           -- Yüngül və sürətli: Əməliyyat sistemi thread-lərindən daha yüngül və daha az resurs tələb edir.
+           -- Məhdud performans: Eyni zamanda yalnız bir CPU nüvəsində işləyə bilər. Bu səbəbdən, çox nüvəli sistemlərdə optimal performans vermir.
+           -- Bloklama problemləri: Green Threads bir-birindən müstəqil olmadığı üçün, bir thread bloklandıqda (məsələn, I/O əməliyyatı zamanı), bütün sistem dayana bilər.
+
+
+        -->Native Threads
+              Native Threads isə əməliyyat sistemi tərəfindən birbaşa idarə olunan thread-lərdir.
+              Bu tip thread-lər əməliyyat sisteminin verdiyi imkanlardan maksimum istifadə edir və sistem səviyyəsində
+              çox nüvəli prosessorlarda effektiv işləyir.
+
+        --> Native Threads-in xüsusiyyətləri:
+
+           -- Əməliyyat sistemi dəstəyi: Əməliyyat sistemi tərəfindən yaradılır və idarə olunur.
+           -- Daha yaxşı performans: Native Threads çox nüvəli prosessorlarda eyni zamanda müxtəlif CPU nüvələrində paralel işləyə bilir.
+           -- Bloklama daha yaxşı idarə olunur: Əməliyyat sistemi hər bir thread-in icrasını ayrı-ayrılıqda idarə edir və bir thread bloklandıqda digər thread-lər işini davam etdirə bilər.
+           -- Daha ağır: Native Threads daha çox resurs tələb edir və idarəetmə overhead-ləri daha çoxdur.
+
+
+           Java-da Green Threads varmı?
+           -- Java-nın ilk versiyalarında, konkret olaraq JDK 1.1 və daha əvvəlki versiyalarda, Java Green Threads istifadə edirdi.
+              Bu zaman Java Virtual Machine (JVM) öz threading modelini qurmuşdu və əməliyyat sistemi ilə bağlı olmadan multithreading
+              əməliyyatlarını həyata keçirirdi. Lakin Green Threads çox nüvəli prosessorlarda yaxşı performans vermirdi və I/O bloklama
+              kimi problemlər səbəbindən əhəmiyyətli məhdudiyyətlər var idi.
+
+           -- JDK 1.2 versiyasından etibarən Java Green Threads-i tərk etdi və Native Threads mexanizminə keçdi. Native Threads,
+             əməliyyat sisteminin threading mexanizmi ilə işlədiyi üçün daha səmərəli və yüksək performanslıdır, xüsusilə çox nüvəli
+             prosessorlar üçün uyğundur. Bu səbəbdən, hazırkı Java versiyalarında Green Threads artıq istifadə olunmur.
 
 
 
