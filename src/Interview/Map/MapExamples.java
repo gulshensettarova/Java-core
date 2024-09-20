@@ -8,7 +8,7 @@ import java.util.Map.Entry;
 
 public class MapExamples {
     public static void main(String[] args) {
-        // Interview.Map yarat
+        // Map yaradırıq
         Map<String, Integer> map = new HashMap<>();
 
         // 1. put(K key, V value) - Açar-Dəyər Cütü Əlavə Etmək
@@ -32,15 +32,15 @@ public class MapExamples {
         boolean hasValue30 = map.containsValue(30);
         System.out.println("Contains value 30: " + hasValue30); // Output: Contains value 30: true
 
-        // 6. size() - Interview.Map-dəki Açar-Dəyər Cütlərinin Sayını Əldə Etmək
+        // 6. size() - Map-dəki Açar-Dəyər Cütlərinin Sayını Əldə Etmək
         int size = map.size();
         System.out.println("Interview.Map size: " + size); // Output: Interview.Map size: 1
 
-        // 7. isEmpty() - Interview.Map-in Boş Olub-Olmadığını Yoxlamaq
+        // 7. isEmpty() - Map-in Boş Olub-Olmadığını Yoxlamaq
         boolean isEmpty = map.isEmpty();
         System.out.println("Interview.Map is empty: " + isEmpty); // Output: Interview.Map is empty: false
 
-        // 8. clear() - Interview.Map-dəki Bütün Açar-Dəyər Cütlərini Silmək
+        // 8. clear() - Map-dəki Bütün Açar-Dəyər Cütlərini Silmək
         map.clear();
         System.out.println("After clear(): " + map); // Output: {}
 

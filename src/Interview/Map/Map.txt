@@ -1,11 +1,11 @@
-Interview.Map nədir? --->
+Map nədir? --->
             Interview.Map Java-da istifadə olunan bir interfeysdir və açar-dəyər (key-value) cütləri ilə işləyir.
             Bu, onu digər Interview.Collection interfeyslərindən fərqli edir. Interview.Map bir verilənlər strukturudur və əsas məqsədi
             hər bir açara qarşı uyğun bir dəyər saxlamaqdır. Açarlar unikal olmalıdır, yəni eyni açarı bir neçə dəfə
             istifadə etmək mümkün deyil, amma dəyərlər təkrarlana bilər.
 
-Niyə Interview.Map Interview.Collection sayılmır? --->
-            Java-da Interview.Map interfeysi Interview.Collection interfeysinin bir hissəsi deyil, çünki onun verilənləri idarə etmə prinsipi fərqlidir.
+Niyə Map Interview.Collection sayılmır? --->
+            Java-da Map interfeysi Collection interfeysinin bir hissəsi deyil, çünki onun verilənləri idarə etmə prinsipi fərqlidir.
             Interview.Collection interfeysi sadəcə obyektlərin bir siyahısı ilə işləyir (məsələn, List, Set), halbuki Interview.Map açar-dəyər cütü saxlayır.
 
 İstifadə qaydası --->
@@ -17,7 +17,7 @@ Dəstəklənən metodlar --->
             Bunun yerinə, put(), get(), remove() kimi metodlar istifadə edilir.
 
 
-Interview.Map interfeysinin növləri --->
+Map interfeysinin növləri --->
             Java-da müxtəlif növ Interview.Map implementasiyaları mövcuddur:
 
             1) HashMap: Açarları və dəyərləri təsadüfi qaydada saxlayır, sıralama yoxdur.
