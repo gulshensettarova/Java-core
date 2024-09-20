@@ -1,0 +1,23 @@
+Switch --->
+    1) The Default statement is optional in Switch.
+    2) Case label literals must be final constant values
+    3) Break statement at the end of the case statements is optional
+--------------------------------------------------------------------------------
+Casting --->
+
+--------------------------------------------------------------------------------
+Access modifier --->
+    1.The overriden method in child class should be as least as accessible
+      as the parent class method.
+      private< (default) < protected < public
+
+--------------------------------------------------------------------------------
+String | StringBuilder | StringBuffer
+
+qeyd-1 : toString() metodu StringBuilder-i string-ə çevirir.
+
+     StringBuilder sb=new StringBuilder("Java");
+     String s="Java";
+     sb.toString().equals(s.toString()) ---> true (Çünki tostring() metodu ile her ikisi string-e cevirilib.
+     equals metodu da String class-i ucun override olunmur bir metoddur, iki deyisenin deyerlerini muqayise edir)
+

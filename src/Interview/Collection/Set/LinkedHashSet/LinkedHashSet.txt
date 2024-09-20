@@ -1,0 +1,73 @@
+Sıra Saxlama --->
+            LinkedHashSet, elementlərin əlavə edildiyi sıranı saxlayır.
+            Bu, LinkedHashSet-in HashSet-dən fərqli olduğunu göstərir,
+            çünki HashSet elementlərin sırasını təmin etmir.
+            Məsələn, əgər siz LinkedHashSet-ə B,A,C elementlərini əlavə etsəniz,
+            elementlər A, B, C sırasına görə çıxarılacaq.
+
+
+Unikal Elementlər --->
+            LinkedHashSet yalnız unikal (təkrarlanmayan) elementləri saxlayır.
+            Əgər eyni element artıq varsa, əlavə etmə əməliyyatı uğursuz olur.
+            Bu xüsusiyyət, Set interfeysindən gəlir.
+            Yəni, LinkedHashSet bütün Set-in qaydalarına əməl edir.
+
+Sürət və Performans --->
+            LinkedHashSet-in əsas əməliyyatları (element əlavə etmək, silmək və yoxlamaq)
+            O(1) vaxt müraciəti ilə həyata keçirilir. Bu, HashSet-lə eynidir.
+            Lakin, LinkedHashSet əlavə yaddaş istifadə edir,
+            çünki elementlərin sırasını saxlamaq üçün əlavə struktur (linked list) istifadə edir.
+
+
+Yaddaş İstifadəsi --->
+            LinkedHashSet, elementləri saxlayarkən əlavə əlaqələr saxlamaq üçün
+            əlavə yaddaş tələb edir. Bu, HashSet-dən fərqli olaraq, daha çox yaddaş
+            istifadə edir.
+
+
+LinkedHashSet-in İnternallığı --->
+            LinkedHashSet iki əsas strukturu birləşdirir:
+            1) Hash Table: Elementlərin sürətli axtarışı üçün istifadə olunur.
+            2) Doubly Linked List: Elementlərin əlavə edilən sıraya görə saxlanması
+            üçün istifadə olunur.
+
+Constructors --->
+            1) Default Constructor : LinkedHashSet<String> set = new LinkedHashSet<>();
+            2) Constructor with Initial Capacity : LinkedHashSet<String> set = new LinkedHashSet<>(10);
+            3) Constructor with Initial Capacity and Load Factor : LinkedHashSet<String> set = new LinkedHashSet<>(10, 0.75f);
+            4) Constructor with Interview.Collection : LinkedHashSet<String> set = new LinkedHashSet<>(list);
+
+
+Qeydlər --->
+            1) LinkedHashSet, elementlərin əlavə edildiyi sıranı saxlayaraq və yalnız unikal
+               elementləri təmin edərək, həm HashSet-in sürətini, həm də LinkedList-in sırasını
+               edir. Bu, onu sıralı, təkrarlanmayan elementləri saxlamaq istəyən proqramlar
+               üçün ideal edir.
+
+Case --->
+           1) Bir onlayn anketdə istifadəçilərdən cavab toplanır və hər istifadəçi yalnız
+              bir cavab göndərə bilər. Məsələn, anketdən alınan cavabları təkrarlanmayan
+              və sıraya uyğun saxlamaq üçün LinkedHashSet istifadə edilə bilər.
+           2) Onlayn mağazada bir istifadəçi məhsul əlavə edir. Məhsulların əlavə edildiyi sıranı saxlamaq,
+              lakin eyni məhsulun təkrarlanmamasını təmin etmək istəyirsinizsə, LinkedHashSet istifadə edə bilərsiniz.
+           3) Bir istifadəçi eyni açar sözləri bir neçə dəfə axtara bilər, lakin tarixi saxlayarkən yalnız təkrarsız
+              axtarış sorğularını görmək istəsəniz və eyni zamanda axtarışların əlavə edilmə sırasını qorumaq istəsəniz,
+              LinkedHashSet uyğun seçimdir.
+
+Time complexity --->
+
+        1) (add) – O(1): Element əlavə edərkən LinkedHashSet hash kodlar əsasında işləndiyinə görə sabit zamanda
+                   həyata keçirilir. Ancaq çox sayda kolliziya varsa, bu əməliyyat ən pis halda O(n)-ə qədər uzana bilər.
+
+        2) (remove) – O(1): Hash strukturu olduğu üçün, element çıxarmaq da əksər hallarda sabit zamanda yerinə yetirilir.
+                     Lakin çox sayda kolliziya zamanı mürəkkəblik artaraq O(n) ola bilər.
+
+        3) (contains) – O(1): LinkedHashSet-də elementin olub-olmadığını axtarmaq ümumilikdə sabit zamanda baş verir.
+                        Lakin müəyyən kolliziya hallarında bu mürəkkəblik O(n)-ə qədər arta bilər.
+
+        4) (iterator) – O(n): Bütün elementlər üzərində iterasiya xətti zamanda həyata keçirilir, çünki LinkedHashSet
+                        sıralı elementlər siyahısı yaradır və LinkedList vasitəsilə hər bir elementi keçmək tələb olunur.
+
+
+
+

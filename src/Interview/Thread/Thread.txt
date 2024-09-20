@@ -1,0 +1,319 @@
+1. MultiThreading vs MultiProcessing vs MultiProgramming vs MultiTasking?------>
+
+          a) MultiThreading- Java-da ən geniş istifadə olunan paralel işləmə mexanizmi MultiThreadingdir.
+                             Java-da ipliklər (Interview.Thread sinifi və ya ExecutorService) eyni proses daxilində paralel
+                             işləyən birdən çox tapşırığın həyata keçirilməsinə imkan verir. Interview.Thread-lər eyni yaddaş
+                             sahəsini paylaşır və daha yüngül olduğu üçün MultiProcessing-dən daha çevikdir.
+
+          b) MultiProcessing -MultiProcessing, Java-da birdən çox prosesin fərqli CPU-larda işlədilməsi deməkdir.
+                              Əməliyyat sistemi bu prosesləri müxtəlif CPU-lar arasında bölə bilər.
+                              Hər bir Java proqramı müstəqil bir proses kimi işləyə bilər, amma bu proseslər
+                              fərqli JVM-lər üzərində işləyir.
+
+          c) MultiProgramming -Java-da bir JVM (Java Virtual Machine) birdən çox proqramı işlədə bilər.
+                               Hər bir Java proqramı fərqli bir prosesdir və bu proseslər paralel işləmək
+                               üçün əməliyyat sistemi tərəfindən idarə olunur.
+
+          d) MultiTasking  -Java-da birdən çox proses və ya thread icra olunaraq MultiTasking həyata keçirilir.
+                            Bir JVM bir neçə Java proqramını idarə edə bilər və ya bir proqram daxilində bir
+                            neçə tapşırığı paralel icra edə bilər. Java-da əsas MultiTasking mexanizmi
+                            threads istifadə edir.
+
+          Sxematik təsvir: |--- MultiProgramming — birdən çox Java proqramını eyni yaddaşa yükləyir.
+
+                               |--- MultiTasking — bir JVM-də birdən çox tapşırıq icra edir
+                                    (MultiThreading istifadə edə bilər).
+
+                                    |--- MultiProcessing — fərqli CPU-larda birdən çox proses
+                                         (hər proses fərqli JVM-lərdə işləyə bilər).
+
+                                            |--- MultiThreading — hər proses daxilində birdən çox thread icra olunur.
+
+2. Concurrency və Parallelism nədir? Onlar arasındakı fərqlər nələrdir?
+
+        Concurrency  nədir? --->
+        Concurrency, bir proqramın eyni zamanda birdən çox tapşırıq üzərində işləmə qabiliyyətidir,
+        amma bu tapşırıqlar mütləq həqiqi olaraq eyni anda icra olunmaya bilər. Bu o deməkdir ki, tapşırıqlar
+        bir-birini qısa müddətlər üçün "dayandıraraq" icra olunur. Yəni Concurrency ilə bir tapşırıq bitmədən
+        digərinə keçilir və bu keçid o qədər sürətli olur ki, sanki tapşırıqlar eyni anda işləyirmiş kimi görünür.
+        Amma əslində, bu tapşırıqlar bir CPU-da növbəli şəkildə icra olunur. Bu növbəli keçid mexanizmi resurslardan
+        effektiv istifadəni təmin edir.
+
+        Misal ilə izah:
+        Təsəvvür et ki, sənin bir aşpazın var və o həm yemək bişirir, həm də salat hazırlayır. Aşpaz yeməyi bişirərkən
+        qazanı qaynamağa qoyub, o vaxtda salat kəsməyə başlayır. Sonra yenidən yeməyi qarışdırmağa qayıdır. Yəni, aşpaz
+        eyni anda iki işlə məşğul olmur, amma çox sürətli keçidlər edir. Bu vəziyyət Concurrency ilə bənzəyir.
+
+        Java-da Concurrency təmin edən mexanizmlər (məsələn, Interview.Thread, Runnable, ExecutorService) tapşırıqları
+        bu şəkildə növbə ilə icra edə bilər. Bir nüvə olduğu təqdirdə, birdən çox thread eyni anda işləmir.
+        Hər bir thread qısa müddət ərzində işləyir, sonra dayandırılıb digəri işə başlayır.
+
+        Parallelism nədir? --->
+        Parallelism isə birdən çox tapşırığın eyni vaxtda, yəni eyni anda bir neçə CPU və ya nüvə (core) üzərində
+        həqiqi şəkildə icra olunmasını nəzərdə tutur. Paralel işləmə üçün çox nüvəli və ya çox CPU-lu sistemlər
+        lazımdır, çünki tapşırıqlar tam olaraq eyni vaxtda yerinə yetirilir.
+        Məsələn, iki aşpazın olduğunu düşün. Bir aşpaz yemək bişirir, digər aşpaz isə eyni anda salat hazırlayır.
+        Bu vəziyyət Parallelismdir, çünki hər iki tapşırıq eyni vaxtda icra olunur və resurslar paralel istifadə olunur.
+
+4.Interview.Thread Safe ---->
+        Interview.Thread Safe birdən çox thread-in eyni bir mənbəyə müraciəti zaman ortaya çıxan uyğunsuzluqlardır .
+        Kodumuzun thread safe olması üçün aşağıdakı şərtlərdən ən azı biri ödənməlidir :
+
+        1. İmmutable class yaratmaq
+        2. Synchronized-dan istifadə etmək
+        3. Reentrant Lock-dan istifadə etmək
+        4. Bir methoda eyni bir parametri verdikdə hər dəfə eyni output-u almaq
+
+
+5.Race condition nədir? -------------->
+
+       Yuxarda qeyd olunduğu kimi multithreading zamanı thread-lər eyni yaddaş sahəsini paylaşır.
+       Bu da bəzi problemlərə səbəb olurki, bu problemlərdən biri də race condition-dur.
+       Race condition- thread-lər yaddaş sahəsindəki dəyişənə eyni anda müraciət edib onu dəyişməyə çalışır.
+       Məsələn : Bank hesabında 300 AZN pul var. 2 müxtəlif istifadəçi bu balansa pul transfer edir.
+       Birinci müştəri balansa 50 AZN, ikinci isə 100 AZN pul transfer edir. Bu prossesdə hər iki thread
+       balance dəyişəninə eyni anda müraciət etdiyi üçün 300 qiymətini götürür və əlavə olunacaq dəyər bu qiymətin
+       üzərinə gəlir:
+          Birinci müştəri : 300+ 50
+          İkinci müştəri : 300+100
+          Bu halda hesabdaki balance 350 və ya 400 görsənəcək (Threadlərin hansinin sonda işini bitirdiyindən asılı olaraq)
+          Halbuki belə olmalı idi : 300+50+100 (və ya 300+100+50)
+
+
+6.Race condition-un qarşısını almaq üçün Lock mechanism-lər tədbiq olunur ---->
+         1) Atomic classes
+         2) Intrinsic Locks (Monitor Locks)-Bunlar synchronized bloklar və metodlarla təmin olunur.
+         3) ReentrantLock
+         4) Cycle Barier
+
+    a)Atomik Əməliyyat Nədir?
+     -----> Bir dəyişən atomik elan edildikdə, hər hansı bir thread bu dəyişəni oxuduqda o
+            avtomatik bloklanır və thread-in işi bitənə qədər başqa thread-ın bu dəyişəni istifadə
+            etməsinə icazə vermir.Java-da atomik əməliyyatları təmin etmək üçün java.util.concurrent.atomic
+            paketində müxtəlif  siniflər mövcuddur. Bu siniflər atomik dəyişənlər üzərində əməliyyatlar aparmaq üçün xüsusi
+            alqoritmlərdən istifadə edirlər.
+            Nümunə :  private AtomicInteger balance = new AtomicInteger(1000);
+            Qeyd : custom class-larda AtomicReferance istifade edilir.
+            AtomicReference<Person> atomicPerson = new AtomicReference<>(new Person("Gulshan"));
+
+    b)Monitor Locks nədir?
+    ----> Java-da monitor lock synchronized açar sözü ilə həyata keçirilir. synchronized açar sözü
+          iki şəkildə istifadə edilə bilər:
+          1.synchronized methods
+          2.synchronized blocks
+
+
+    ----> Monitor Locks (və ya sadəcə Monitors) Java-da çox istifadə olunan sinxronizasiya mexanizmidir
+          və hər bir obyekt üçün daxil olan daxili bir kilid (lock) kimi işləyir. Monitor kilidləri (locks)
+          Java-da thread-lər arası (multithreading) təhlükəsizliyi təmin etmək üçün istifadə olunur. Bir neçə
+          thread eyni obyekt üzərində işlədikdə, obyektin vəziyyətinin (state) dəyişikliyinin ardıcıl olmasını təmin
+          etmək üçün monitor kilidləri tətbiq edilir.
+
+    ----> Java-da hər obyektin daxili bir monitoru vardır. Bu monitorun kilidi müəyyən kod bloku və ya metod sinxronizasiya
+          olunmuş şəkildə işlədikdə aktivləşir. Yəni, bir thread monitor kilidini əldə edəndə, digər thread-lər həmin monitoru
+          əldə edə bilmir və kodun həmin bölməsini icra etmək üçün gözləməli olur.
+
+
+    c)Reentrant Lock nədir?
+
+    ---->Java-dakı java.util.concurrent.locks paketində təqdim olunan bir sinifdir
+    ---->lock() metodu vasitəsilə klid əldə edilir, unlock() metodu vasitəsilə klid azad edilir.
+         Bu metodlar try-finally blokunda istifadə olunur ki, lock hər zaman azad edilsin, hətta istisna halında belə.
+    ---->Synchronized  bloklardan fərqli olaraq klidin açılmasını və buraxılmasını özümüz təyin edirik.
+
+
+    d)Cycle Barier Lock nədir?
+    ----> Burada metoda eyni anda daxil ola biləcək thread sayini özümüz müəyyən edirik.
+         Metodun daxilində barier yaradılır. Elə fərz edək ki, metoda daxil ola biləcək thread sayı 5-dir.
+         Bu 5 thread eyni anda metoda daxil olur, barier-ə çatanda gözləyir. 5 thread-in hamısı barier-ə çatdıqdan
+         sonra barier açılır və thread-lər işlərinə davam edir.
+
+    ----> await(): Interview.Thread-lər barrierə çatdıqda await() metodunu çağırır. Bu metod, barrier nöqtəsinə çatana
+          qədər thread-lərin gözləməsini təmin edir.
+
+
+
+7.Semaphora nədir?
+   ----> Eyni anda neçə thread-in işləyəcəyini təyin edən bir sinifdir. java.util.concurrent paketində yerləşir
+   ----> acquire(): Interview.Thread-in icazəni əldə etməsi üçün bu metod çağırılır. Əgər icazə varsa, thread icazəni alır və davam edir.
+         Əks halda, thread gözləyir.
+   ----> release(): Interview.Thread icazəni sərbəst buraxır. Bu, digər gözləyən thread-lərə icazə almaq imkanı verir.
+
+
+8.Mutex nədir?
+
+   ---->Mutex çoxlu thread-lərin eyni resursa daxil olmasının qarşısını alır və bu məqsəd üçün sinxronizasiya
+        mexanizmləri təklif edir.
+   ---->Java-da Mutex rolunu synchronized blokları və ReentrantLock ilə oynamaq mümkündür.
+   ---->ReentrantLock daha çox çeviklik və əlavə funksiyalar təmin edir, məsələn, tryLock və lockInterruptibly
+        metodları, hansı ki, daha incə nəzarət və idarəetmə imkanı verir.
+
+9. Interview.Thread-lər necə yaradılır?
+    a) Interview.Thread classında extend etməklə --> Bu üsüldan istifadə etdikdə hər thread üçün ayrıca bir obyekt yaradılmalıdır.
+       Qeyd: Interview.Thread class-ı özü də Runnable interface-i implement edir. Ona görə də run() metodu override olunmalıdır.
+    b) Runnable interface-dən implement etməklə --> Burada ayrı-ayrı obyekt yaratmağa ehtiyac yoxdur.
+       Runnable interface-i daxilində olan run metodu override olunmalıdır.
+    c) Callable-interface-dən implement etməklə --> Burada ayrı-ayrı obyekt yaratmağa ehtiyac yoxdur.
+       Callable interface-i daxilində olan call metodu override olunmalıdır. run()-dan fərqli olaraq call()
+       metodu geriyə dəyər qaytaran metoddur.
+
+10.Terminlər ---->
+
+    a)  Ordering (Sıralama) --> multithreading və ya paralel proqramlaşdırma zamanı əmrlərin icra ardıcıllığını
+                                müəyyən edir. Java-da əmrlər ardıcıllıqla yazılsa da, optimallaşdırmalar, prosessorun iş prinsipi və ya
+                                Java Virtual Machine (JVM) səbəbindən əmrlər gözlənildiyi kimi sırayla icra olunmaya bilər. Bunun səbəbi,
+                                JVM-in performansı artırmaq üçün bəzi optimallaşdırmaları yerinə yetirməsidir. Bu optimallaşdırmalar proqramın
+                                görünən nəticəsini dəyişməsə də, əmrlərin hansı ardıcıllıqla icra olunduğunu dəyişə bilər.
+    b) As-if-serial Semantics --> Bu prinsip, tək bir thread-də əmrlərin ardıcıllığının dəyişdirilə biləcəyini,
+                                 amma bu dəyişikliklərin proqramın nəticəsinə təsir etməməsini təmin edir. Yəni, əmrlər paralel işlədilə və ya
+                                 optimallaşdırıla bilər, amma bu, sanki əmrlər ardıcıl icra olunmuş kimi bir nəticə verməlidir.
+
+       Necə təmin edilir?
+          |--> Visibility - Bir thread-də edilən dəyişikliklər digər thread-lərə zamanında görünməlidir.
+          |--> Atomicity - Dəyişikliklər bir anda və tam şəkildə görülməlidir.
+          |--> Ordering -  Əməliyyatlar gözlənilən ardıcıllıqla icra edilməlidir, yəni optimallaşdırmaların nəticə
+                           üzərində təsiri olmamalıdır.
+       Real case: Bir çox thread eyni resursu idarə etməyə çalışırsa (məsələn, bank hesabına giriş) və əmrlər düzgün sırada
+                  icra olunmazsa, pul transferləri səhv nəticələr verə bilər. Bu hallarda as-if-serial semantics təmin edilməlidir ki,
+                  əməliyyatlar doğru şəkildə icra olunsun.
+
+    c) sequential consistency --> çoxlu thread-lərin olduğu paralel proqramlaşdırmada vacib bir konsepsiyadır. Bu konsepsiya,
+                                 bütün əməliyyatların, fərqli thread-lərin daxil olduqları resurslar üzərində ardıcıl şəkildə işləməsini təmin edir.
+                                 Başqa sözlə, sequential consistency təmin edildikdə, əməliyyatlar hər bir thread-in daxilində elə icra olunmalıdır ki,
+                                 nəticə sanki əməliyyatlar ardıcıl icra olunmuş kimi görünsün.
+
+       Qeyd : Sequential consistency bir neçə thread-in resurslara eyni vaxtda müraciət etməsi hallarında ardıcıl uyğunluğu təmin edir.
+              As-if-serial semantics isə tək thread daxilində kodun optimallaşdırılsa belə, nəticənin dəyişməyəcəyini təmin edir.
+              Ordering prosessor səviyyəsində əməliyyatların necə icra olunduğunu və sıralamanın necə dəyişə biləcəyini nəzarət edir.
+
+    d) Visibiity --> Interview.Thread-lərin hər biri öz yaddaşında müəyyən dəyişənləri saxlayır (məsələn, CPU cache-də) və digər thread-lər
+                     həmin dəyişənlərin dəyərinin dəyişdiyini görməyə bilər. Bu səbəbdən, bir thread-də dəyişdirilən məlumat başqa bir thread
+                     tərəfindən oxunarkən köhnə dəyəri qaytarıla bilər. Visibility problemi, iki və ya daha çox thread-in sinxronizasiya olunmadan
+                     paylaşdığı verilənlərlə işləməsi zamanı yaranır. Volatile keyword-u ilə problem aradan qaldırılər.
+
+    e) Happens-before --> Bu anlayış, bir əməliyyatın digər əməliyyatdan əvvəl tamamlandığına zəmanət vermək üçün istifadə olunur.
+                          Interview.Thread-lərin paralel icrasında, bir əməliyyatın digərindən əvvəl yerinə yetirildiyini və nəticələrin
+                          bu qaydada göründüyünü təmin etmək üçün happens-before qaydaları tətbiq edilir.
+
+                          Happens-before nədir?
+                          Happens-before əlaqəsi iki əməliyyat arasında müəyyən edilir və aşağıdakıları təmin edir:
+
+                          1)Əgər bir əməliyyat digərindən əvvəl baş veribsə (happens-before münasibəti varsa), o zaman birinci əməliyyatın təsiri ikincidən əvvəl baş verəcək.
+                            Başqa sözlə, ilk əməliyyatın nəticələri ikincidən əvvəl bütün thread-lərə görünəcək.
+                          2)Əgər iki əməliyyat arasında happens-before əlaqəsi yoxdursa, bu, o əməliyyatların müəyyən bir sıralamada baş verməyəcəyini göstərir
+                            və hər bir thread-in gördüyü nəticələr fərqli ola bilər.
+
+                            Nə zaman istifadə olunur: Bir əməliyyatın (məsələn, bir obyektin yazılması) digər əməliyyatdan əvvəl yerinə yetirildiyinə əmin olmaq üçün.
+                            Təmin etmə yolları: synchronized bloklar, volatile dəyişənlər, ExecutorService kimi strukturda.
+
+    f) Safe Publication --> obyektin müxtəlif thread-lər arasında təhlükəsiz şəkildə paylaşılması və obyektin tam qurulmuş halının görünməsini təmin edən yanaşmadır.
+                            Obyektin heç bir thread üçün yarımçıq və ya səhv vəziyyətdə görünməməsini təmin edir.
+
+                            Nə zaman istifadə olunur: Obyektlərin tam qurulmuş vəziyyətdə digər thread-lər tərəfindən görünməsini təmin etmək üçün.
+                            Təmin etmə yolları: volatile, synchronized, final sahələr, thread-safe obyektlər.
+                            Real case: Konfiqurasiya obyektinin paylaşılması və ya obyekti başa çatmış vəziyyətdə bir çox thread arasında yaymaq.
+
+
+
+11. ExecutorService
+
+   ---->  Java-da multi thread-lərlə işləmək üçün istifadə olunan bir interfeysdir və Java Concurrency Framework-in əsas komponentlərindən biridir.
+          O, task-ları (tapşırıqları) idarə etmək üçün daha sadə və effektiv bir yol təmin edir.
+   ---->  Əsas Xüsusiyyətlər və Faydalar:
+          1. Interview.Thread Pool Management -> ExecutorService thread-ləri dinamik olaraq idarə edir. Bu, çox sayda thread yaratmağı və idarə etməyi sadələşdirir,
+                                       çünki siz yeni thread-lər yaratmaq əvəzinə, mövcud thread-ləri istifadə edə bilərsiniz.
+                                       Interview.Thread pool-da bir neçə thread əvvəlcədən yaradılır və bunlar task-ları icra etmək üçün istifadə olunur.
+                                       Bu, resursların daha effektiv istifadəsini təmin edir.
+          2. Task Scheduling -> ExecutorService tapşırıqları müəyyən vaxtlarda və ya müəyyən aralıqlarla icra etmək üçün təyin etməyə imkan verir.
+                                Bu, müntəzəm və vaxtdan asılı tapşırıqları idarə etməyə kömək edir.
+          3. Future Interface -> ExecutorService tapşırıqların nəticələrini almaq üçün Future interfeysini təqdim edir. Future vasitəsilə bir tapşırığın nəticələrini əldə edə bilər,
+                                 tapşırığın tamamlanmasını gözləyə bilərsiniz və ya nəticəni əldə etmək üçün bloklaya bilərsiniz.
+          4.Graceful Shutdown -> ExecutorService-in düzgün və nəzakətli şəkildə bağlanmasını təmin edən bir üsuldur. Bu üsul yeni tapşırıqların qəbulunu dayandırır
+                                 və hazırda icra olunan tapşırıqları tamamlayaraq, bütün resursları sərbəst buraxır. Bu, proqramın və ya sistemin düzgün və etibarlı şəkildə bağlanmasını təmin edir.
+
+   ----> Əsas Metodlar:
+        1. submit() -> Tapşırığı icra etmək üçün ExecutorService-ə təqdim edir. Bu metod Future obyektini qaytarır.
+        2. invokeAll() -> Bir neçə tapşırığı eyni anda icra edir və nəticələri List<Future> obyektində qaytarır.
+        3. invokeAny() ->Bir neçə tapşırıqdan ilk tamamlanmış tapşırığın nəticəsini qaytarır.
+        4. shutdown() -> ExecutorService-in yeni tapşırıqları qəbul etməyi dayandırmasını təmin edir.
+        5. shutdownNow() ->ExecutorService-i dərhal bağlayır və icra olunmayan tapşırıqları ləğv edir.
+
+
+--------------------Yarimciq----------------------------------------------
+
+
+12. Process  vs Interview.Thread ---->
+
+    Proccess --> Proses, müəyyən bir proqramın icra olunduğu müstəqil bir iş vahididir. Proqram işlədiyi zaman bir proses yaranır və onun icrasını təmin edir. Proseslər arasında bir-birindən müstəqillik var və hər prosesin öz yaddaş sahəsi olur.
+                 Java-da hər dəfə bir proqram başladığınız zaman yeni bir proses yaranır.
+    Interview.Thread --> Interview.Thread isə bir prosesin daxilində icra edilən iş axınıdır. Yəni, bir proses bir neçə thread-ə bölünə bilər və onlar eyni yaddaş sahəsini paylaşa bilərlər. Interview.Thread-lər prosesi daha səmərəli idarə etmək üçün çoxlu paralel işlər yerinə yetirə bilər.
+           ->  Yaddaş paylaşımı :  Interview.Thread-lər eyni proses daxilində icra olunduğundan, eyni yaddaş sahəsini və resursları paylaşırlar.
+           ->  İcra müddəti :  Bir prosesin müxtəlif hissələri eyni anda paralel olaraq işləyə bilər (multithreading). Bu, sistemin resurslarını daha yaxşı istifadə etməyə imkan verir.
+           ->  Yüngül icra vahidi : Interview.Thread-lər prosesdən daha yüngüldür və əməliyyat sisteminin idarəetmə xərcləri daha azdır.
+
+
+13. Green Threads və Native Threads  ---->
+        Green Threads -->
+            Green Threads əməliyyat sistemi tərəfindən deyil, proqramın və ya JVM-in (Java Virtual Machine) özü tərəfindən idarə olunan virtual (yəni proqram səviyyəsində) thread-lərdir.
+            Bu mexanizm çoxlu thread-lərin bir əməliyyat sistemi prosesində icra olunmasına imkan verir və hər bir green thread-in idarə olunması əməliyyat sistemindən asılı olmur.
+
+        --> Green Threads-in bəzi xüsusiyyətləri:
+           -- Əməliyyat sistemi müstəqilliyi: Əməliyyat sistemi səviyyəsində deyil, proqram səviyyəsində icra olunur.
+           -- Multithreading əməliyyat sistemindən asılı deyil: Hətta əməliyyat sistemi multithreading dəstəkləməsə belə, Green Threads ilə paralel işlər görülə bilər.
+           -- Yüngül və sürətli: Əməliyyat sistemi thread-lərindən daha yüngül və daha az resurs tələb edir.
+           -- Məhdud performans: Eyni zamanda yalnız bir CPU nüvəsində işləyə bilər. Bu səbəbdən, çox nüvəli sistemlərdə optimal performans vermir.
+           -- Bloklama problemləri: Green Threads bir-birindən müstəqil olmadığı üçün, bir thread bloklandıqda (məsələn, I/O əməliyyatı zamanı), bütün sistem dayana bilər.
+
+
+        -->Native Threads
+              Native Threads isə əməliyyat sistemi tərəfindən birbaşa idarə olunan thread-lərdir.
+              Bu tip thread-lər əməliyyat sisteminin verdiyi imkanlardan maksimum istifadə edir və sistem səviyyəsində
+              çox nüvəli prosessorlarda effektiv işləyir.
+
+        --> Native Threads-in xüsusiyyətləri:
+
+           -- Əməliyyat sistemi dəstəyi: Əməliyyat sistemi tərəfindən yaradılır və idarə olunur.
+           -- Daha yaxşı performans: Native Threads çox nüvəli prosessorlarda eyni zamanda müxtəlif CPU nüvələrində paralel işləyə bilir.
+           -- Bloklama daha yaxşı idarə olunur: Əməliyyat sistemi hər bir thread-in icrasını ayrı-ayrılıqda idarə edir və bir thread bloklandıqda digər thread-lər işini davam etdirə bilər.
+           -- Daha ağır: Native Threads daha çox resurs tələb edir və idarəetmə overhead-ləri daha çoxdur.
+
+
+           Java-da Green Threads varmı?
+           -- Java-nın ilk versiyalarında, konkret olaraq JDK 1.1 və daha əvvəlki versiyalarda, Java Green Threads istifadə edirdi.
+              Bu zaman Java Virtual Machine (JVM) öz threading modelini qurmuşdu və əməliyyat sistemi ilə bağlı olmadan multithreading
+              əməliyyatlarını həyata keçirirdi. Lakin Green Threads çox nüvəli prosessorlarda yaxşı performans vermirdi və I/O bloklama
+              kimi problemlər səbəbindən əhəmiyyətli məhdudiyyətlər var idi.
+
+           -- JDK 1.2 versiyasından etibarən Java Green Threads-i tərk etdi və Native Threads mexanizminə keçdi. Native Threads,
+             əməliyyat sisteminin threading mexanizmi ilə işlədiyi üçün daha səmərəli və yüksək performanslıdır, xüsusilə çox nüvəli
+             prosessorlar üçün uyğundur. Bu səbəbdən, hazırkı Java versiyalarında Green Threads artıq istifadə olunmur.
+
+14.Deadlock və Livelock ---->
+        Deadlock və Livelock paralel proqramlaşdırmada çox rast gəlinən problemlərdir və bu problemlər çoxsaylı thread-lər və ya proseslər arasında qarşılıqlı təsir zamanı meydana çıxır.
+
+        ---> DeadLock : Deadlock, iki və ya daha çox thread-in bir-birini gözləyərək sonsuz şəkildə bloklandığı vəziyyətdir.
+                        Yəni, hər bir thread müəyyən bir resursa malikdir və başqa bir resursa ehtiyacı var, amma o resurs da digər thread tərəfindən bloklanmışdır.
+                        Nəticədə, heç bir thread işini tamamlayıb irəliləyə bilmir və hər biri gözləmə vəziyyətində qalır.
+
+        --> Deadlock-un baş vermə şərtləri:
+            Deadlock-un baş verməsi üçün aşağıdakı 4 şərtin eyni vaxtda olması lazımdır (bu şərtlər "Coffman conditions" adlanır):
+
+          -  Mutual Exclusion : Resurslar yalnız bir thread tərəfindən eyni zamanda istifadə edilə bilər.
+          -  Hold and Wait : Bir thread bir resursu saxlayır və eyni zamanda başqa bir resursa ehtiyac duyur və gözləyir.
+          -  No Preemption: Resurslar zorla geri alına bilməz, yalnız onu saxlayan thread buraxa bilər.
+          -  Circular Wait : İki və ya daha çox thread bir-birindən resurs gözləyir, bu da dövr yaratmış olur (Interview.Thread A, Interview.Thread B-dən, Interview.Thread B isə Interview.Thread A-dan resurs gözləyir).
+
+         ---> Livelock : Livelock, thread-lərin davamlı şəkildə bir-birinin qarşısını almaq üçün fəaliyyət göstərdiyi, amma heç bir irəliləyiş
+                         əldə etmədiyi bir vəziyyətdir. Bu, thread-lərin "işləyirmiş kimi" görünməsi, lakin əslində heç bir işin tamamlanmaması halıdır.
+                         Livelock-da thread-lər bloklanmır, amma işlərini tamamlaya bilmirlər, çünki vəziyyəti düzəltməyə çalışarkən davamlı olaraq öz vəziyyətlərini dəyişirlər.
+
+             Livelock misalı :
+                            Bir misal olaraq, iki şəxs düşünək ki, hər biri dar bir keçiddə bir-birinə yol verməyə çalışır.
+                            Birinci şəxs sağa gedir, ikinci şəxs də sağa gedir. Sonra birinci şəxs sola gedir, ikinci şəxs də sola gedir
+                            və beləliklə, hər dəfə bir-birindən qaçmağa çalışırlar, lakin heç vaxt keçidi keçə bilmirlər.
+
+              Livelock vəziyyətində hər iki thread işləyir, amma bir-birinin fəaliyyətinə uyğun olaraq hər dəfə fərqli bir qərar verirlər və nəticədə
+              heç biri işini tamamlayıb irəliləyə bilmir.
+
+
+

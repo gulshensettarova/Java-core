@@ -1,0 +1,48 @@
+Interview.Map nədir? --->
+            Interview.Map Java-da istifadə olunan bir interfeysdir və açar-dəyər (key-value) cütləri ilə işləyir.
+            Bu, onu digər Interview.Collection interfeyslərindən fərqli edir. Interview.Map bir verilənlər strukturudur və əsas məqsədi
+            hər bir açara qarşı uyğun bir dəyər saxlamaqdır. Açarlar unikal olmalıdır, yəni eyni açarı bir neçə dəfə
+            istifadə etmək mümkün deyil, amma dəyərlər təkrarlana bilər.
+
+Niyə Interview.Map Interview.Collection sayılmır? --->
+            Java-da Interview.Map interfeysi Interview.Collection interfeysinin bir hissəsi deyil, çünki onun verilənləri idarə etmə prinsipi fərqlidir.
+            Interview.Collection interfeysi sadəcə obyektlərin bir siyahısı ilə işləyir (məsələn, List, Set), halbuki Interview.Map açar-dəyər cütü saxlayır.
+
+İstifadə qaydası --->
+            Interview.Map interfeysində verilənlərə açarlar vasitəsilə müraciət edirik, halbuki Interview.Collection interfeyslərində verilənlərə indeks
+            və ya iterator vasitəsilə müraciət edilir.
+
+Dəstəklənən metodlar --->
+            Interview.Collection interfeysi add(), remove() kimi metodları dəstəkləyir, amma Interview.Map interfeysində bu metodlar yoxdur.
+            Bunun yerinə, put(), get(), remove() kimi metodlar istifadə edilir.
+
+
+Interview.Map interfeysinin növləri --->
+            Java-da müxtəlif növ Interview.Map implementasiyaları mövcuddur:
+
+            1) HashMap: Açarları və dəyərləri təsadüfi qaydada saxlayır, sıralama yoxdur.
+                        Hashing mexanizmi ilə işləyir. Sürətli performans təmin edir.
+
+            2) LinkedHashMap: Açarları əlavə olunma sırasına görə saxlayır.
+                              HashMap ilə oxşardır, amma daxil edilmə sırasını qoruyur.
+
+            3) TreeMap: Açarları sıralı şəkildə saxlayır. NavigableMap interfeysini həyata keçirir və
+                        açarların təbii sıralamasına əsaslanır.
+
+            4) Hashtable: HashMapə bənzəyir, amma Hashtable köhnə versiyalı sinifdir və sinxronizasiya olunmuşdur, yəni thread-safedir.
+
+Metodlar --->
+            1) put(K key, V value): Xüsusi açara uyğun olaraq bir dəyər əlavə edir.
+            2) get(Object key): Verilən açara uyğun dəyəri qaytarır.
+            3) remove(Object key): Verilən açarla əlaqəli açar-dəyər cütünü silir.
+            4) containsKey(Object key): Xüsusi açarın mapdə olub-olmadığını yoxlayır.
+            5) containsValue(Object value): Xüsusi dəyərin mapdə olub-olmadığını yoxlayır.
+            6) size(): Interview.Map-də neçə açar-dəyər cütü olduğunu qaytarır.
+            7) keySet(): Interview.Map-dəki bütün açarları qaytarır.
+            8) values(): Interview.Map-dəki bütün dəyərləri qaytarır.
+            9) entrySet(): Interview.Map-dəki bütün açar-dəyər cütlərini qaytarır (Interview.Map.Entry<K, V> formatında).
+
+
+Case --->
+            1)Tələbələrin ID-ləri və onların qiymətləri ilə bir sistem yaratmaq istəyirsiniz (StudentGrades class-da nümunə var).
+            2)Bir mətnin içindəki hər bir sözü saymaq istəyirsiniz (WordCount  class-da nümunə var).

@@ -1,0 +1,71 @@
+1. Stream ilə for fərqi :
+
+Bir nümunə ilə ikisi arasındakı fərqə baxaq:
+    Düşünün ki, işə qəbul prossesində 5 yeni namizəd tələb olunan sənədlərlə
+    şirkətə yaxınlaşıb və işə qəbul prossesinin rəsmiləşdirilməsi üçün 3 otağa
+    sıra ilə daxil olub sənədlərə qol çəkdirməlidirlər.Əgər bu prossesi for dövri ilə
+    izah etsək : Birinci işçi növbə ilə 3 otağa daxil olub sənədlərə qol çəkdirəcək, onun
+    işi bitdikdən sonra isə 2-ci işçi eyni prossesi təkrar edəcək. Bu formada bütün işçilər sıra ilə 3
+    otağa daxil olub sənədlərə qol çəkdirəcəklər.
+    Stream ilə izahı : ilk işçi 1-ci otağa daxil olub sənədə qol çəkdirir, bu işçi 2-ci otağa keçəndə,
+    2-ci işçi birinci otağa daxil olur və sənədə qol çəkdirir, 2-ci işçinin bu otaqda işi bitəndə 3-cü işçi daxil olur
+    və bu formada prosses davam edir.
+
+2. Stream datalar ardıcıllığıdır. Stream pipeline isə bir nəticə əldə etmək üçün stream üzərində yerinə
+   yetirilən əməliyyatlardan ibarətdir.
+
+   source --> intermediate operations --> terminal operations
+
+   1) source -> stream-dəki dataların mənbəsi. Bu mənbə adətən collection olur.
+      Amma, mənbə kimi array, file da istifadə oluna bilər.
+   2) Intermediate operations -> stream-dəki datanı manupulyasiya etməyə imkan verən əmrlərdir.
+   3) Terminal operations -> Yekun nəticəni almaq üçün tədbiq olunan əmrlər
+
+   İzahı: Bizim əlimizdə bir collection var (və ya array, file). Biz ilk öncə bu collectionu
+   source kimi istifadə edib, ordakı datanı bir stream-də toplayırıq (yəni stream yaradırıq).
+   Daha sonra bizə verilən şərtə əsasən bu stream-dən əldə etmək istədiyimi nəticə üçün ilk öncə
+   intermediate operations-dan istifadə edərək, bu dataları daha yararlı bir vəziyyətə salırıq.
+   (filtirləmə, sortlama, təkrar məlumatların silinməsi və s. kimi əməliyyatlar).
+   Son olaraq isə yararlı vəziyytə salınmış yeni stream üzərinə terminal operations-tədbiq etməklə
+   yekun bir nəticə alırıq (cəmləmə, say tapma, collection-da toplama və s. kimi əməliyyatlar).
+
+   Məsələn : Bizə bir array verilib və bu arrayda cüt ədədlərin cəmini tapmağımız istənilir.
+   Bizim tapmalı olduğumuz yekun nəticə cəmdir. Bunun üçün terminal operation sayılan sum() tədbiq edəcəyik.
+   Ama cəmləmə əməliyyatından öncə məsələ qoyulan tələbə əsasən ilk öncə bu dataların içində ancaq cütlər seçilməldiri.
+   Bunun üçün də terminal operation tədbiq etmədən öncə
+   1) arraydan source kimi istifadə edirik və ordaki datani stream-de toplayiriq.
+   2) Bu stream-ə intermediate operation sayılan filter vasitəsilə şərt veririk və sadəcə cüt ədədləri seçirik.
+   3)Ən sonda isə terminal operation olan sum() tədbiq edilir və yekun nəticə alınır.
+
+   Qeyd :
+   --> Intermediate operations zəncir yarada bilər. Yəni biz bir-birinin ardıncı bir neçə metod tədbiq edə bilərik
+   --> Yalnız 1 terminal operation istifadə oluna bilər.
+   --> Intermediate operations Lazy evaluation prinsipi ilə işləyir. Bu o deməkdir ki, bu əmrlər terminal əmr işə düşdükdə icra olunur.
+
+
+Intermediate Metodlar
+    -- filter: Müəyyən bir şərtə uyğun olan elementləri seçir.
+    -- map: Hər bir elementin dəyərini transformasiya edir (məsələn, dəyəri dəyişdirir).
+    -- flatMap: İki ölçülü elementləri bir ölçülü bir stream-ə çevirir.
+    -- distinct: Duplicatları silərək unikal elementləri seçir.
+    -- sorted: Elementləri artan və ya azalan sırayla sıralayır.
+    -- peek: stream üzərindəki elementləri izləməyə imkan verir . (Secmek)
+    -- limit: Stream-dəki elementlərin sayını məhdudlaşdırır.
+    -- skip: Stream-in başlanğıcından müəyyən sayda elementi ötürür.
+    -- concat: İki və ya daha çox stream-i birləşdirir.
+
+
+Terminal Metodlar
+    -- forEach: Streamdəki hər bir element üzərində əməliyyat icra edir.
+    -- collect: Stream-i toplayaraq yeni bir kolleksiya yaradır.
+    -- reduce: Streamdəki elementləri bir dəyərdə toplayır.
+    -- count: Streamdəki elementlərin sayını hesablayır.
+    -- sum: Numerik stream-in cəmini tapır.
+    -- average: Numerik axının ortalamasını hesablayır.
+    -- max: Streamdəki maksimum dəyəri tapır.
+    -- min: Streamdəki minimum dəyəri tapır.
+    -- anyMatch: Streamdə müəyyən bir şərtə uyğun ən azı bir element varsa true döndərir.
+    -- allMatch: Streamdəki bütün elementlər şərtə uyğundursa true döndərir.
+    -- noneMatch: Streamdəki heç bir element şərtə uyğun deyilsə true döndərir.
+    -- findFirst: Streamdəki ilk elementi tapır.
+    -- findAny: Streamdəki istənilən bir elementi tapır (paralel stream-lərdə effektivdir).

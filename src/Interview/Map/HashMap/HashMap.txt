@@ -1,0 +1,57 @@
+
+Əsas anlayışlar --->
+
+    1) Bucket :     HashMap arxada hashTable yaradır və bu array bucketlərdən ibarətdir.
+                    Bucket özündə aşağıdakı 3 elementi saxlayır (hashcode,hashIndex, Key, NextElement)
+    2) Hash code :  Bildiyimiz kimi hashmap key + value cütlüyündən ibarətdir. Daxil edilmiş key-ə
+                    əsasən əvvəlcə hashCode hesablanir.
+    3) Hash index : HashCode-a əsasən hashIndex hesablanır, bu index hashTable-da yerləşəcəyi yeri müəyyən edir.
+                    index=hashCode & (capacity-1)
+    4) Key : index  hesablandıqdan sonra hashTable-da bu index-də node-lar yerləşdirilir
+
+    5) Capacity :   HashMap-ın tutumudur.Default olaraq 16 olur.
+
+    6) LoadFactor : HashMap-in load factor  default olaraq 0.75-dir. Bu o deməkdir ki,
+                    HashMap hash cədvəlindəki mövqelərin 75%-i dolduqda, yeni elementlər əlavə
+                    olunduqda hash cədvəli genişləndirilir (resize edilir).
+    7) ThresHold :  capacity*loadFactor düsturu ilə hesablanır. Bu o deməkdir ki,əgər hashMap-ın tutumu 16-sa
+                    loadFactor 75% olduğu halda threshold düstura əsasən 12 olacaq və hashmap-a 12-ci element daxil
+                    edildikdən sonra tutumu avtomatik artacaq.
+
+           Qeyd :  Capacity və Loadfactor-u custom olaraq da təyin etmək mümkündür -->
+                   Tutumu 32, Load Factor-ı 0.5 olan HashMap yaratmaq:
+                   Interview.Map<String, Integer> map = new HashMap<>(32, 0.5f);
+    8) Collision : Daxil edilən açarların hashcode-ları eyni olduqda avtomatik index-lərdə eyni qiymət alır.
+                   Bu hadisə collision adlanır. Bu hadisə baş verdikdə əlavə olunan yeni element hesablanan
+                   index-də yerləşən node-da nextElement-də yerləşdirilir (LinkedList prinsipi ilə işləyir).
+           Qeyd :  Əgər böyük tutumlu məlumatlarla işləyiriksə bu zaman linkedlist yox tree strukturundan istifadə olunur.
+                   Java 8-dən sonra linkedlistin tutumu müəyyən bir həddi aşdıqda avtomatik tree strukturuna keçir.
+                   Bu prossesin özü Treefy adlanır. Untreefy əməliyyatı isə əks prossesi yerinə yetirir.
+
+    9) hashCode() və equals() metodları arasındakı əlaqə : get əməliyyatı zamanı ilk öncə axtarılan key- üçün
+                    hashcode hesablanır, daha sonra isə bu hashcode əsasında index yuxardakı düstura əsasən hesablanır.
+                    hesablanan index-də yerləşən key götürülür və equals metodu ilə axtarılan key ilə müqayisə edilir.
+                    Əgər true qiyməti qayıdarsa həmin key qaytarılır, yox əgər false qiymət qayıdarsa bu zaman node-da nextElement varsa
+                    ordakı key eyni qayda ilə yoxlanılır. Axtarılan key olana qədər nextElementlər arası gəzir və equals metodu
+                    hansı key üçün true qiymət qaytararsa həmin key istifadəçiyə qaytarılır.
+          Kontrakt:
+                ~ Eyni Obbyektlər eyni Hash Koduna Sahib Olmalıdır:
+                  Əgər iki obyekt equals metodu ilə bərabərsə, onların hashCode-ları da eyni olmalıdır.
+                ~ Eyni Hash Koduna Sahib Obyektlər Eyni Olmalıdır:
+                  Əgər iki obyektin hashCode-ları eynidirsə, bu onların equals metodu ilə bərabər olmalarını təmin etmir.
+                  Bunun səbəbi hash kodlarının koliziya riskini artırmasıdır.
+
+          Qeyd : Sadalanan səbəblərə görə də hashcode() override olunarsa, collision zamanı
+                 doğru nəticələr almaq üçün equals() metodunu da override etməliyik.
+
+Əsas xüsusiyyətlər --->
+               1) (Key-Value Pairs): HashMap-də məlumatlar açar-dəyər cütləri şəklində saxlanılır.
+                   Hər bir açar (key) bir dəyərə (value) bağlanır.
+               2) HashMap 1 null key və çoxlu sayda null value qəbul edə bilər
+                  Qeyd: null key 0-cı indexdə yerləşir (ilk bucket).
+               3) HashMap-ın key-lərini immutable seçmək məsləhət görülür. Çünki key bucket-ə yerləşdirildikdən
+                  sonra dəyişdirilərsə axtarış prossesində çətinlik yaranacaq. Bu səbəbdən best practice kimi key
+                  kimi String və Integer kimi tiplərdən istifadə edilir.
+
+
+
