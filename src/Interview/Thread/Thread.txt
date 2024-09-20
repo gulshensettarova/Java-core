@@ -337,5 +337,17 @@
     -- Bu metod "Starvation" adlı problemi həll edir. Starvation, bir thread-in kilidi almağa çalışarkən,
        digər thread-lərin ardıcıl olaraq kilidi tutduğu üçün heç vaxt kilid əldə edə bilməməsi problemdir.
 
+17. join(),wait(),sleep(),yield()
+
+   1) join --> bir thread-in digər thread-lərin işinin bitməyini gözləyir.
+   2) wait --> yalnız synchronized bloklarda istifadə oluna bilər, çünki o yalnız monitor-u əldə edən
+               thread-lər tərəfindən çağrıla bilər.O, bir obyektin monitorunu sərbəst buraxaraq digər
+               thread-lərin həmin obyekt üzərində işləməsinə icazə verir və həmin thread-i waiting state-ə
+               (gözləmə vəziyyətinə) keçirir.wait() metodunu çağıran thread yalnız başqa bir thread həmin obyekt üzərində
+               notify() və ya notifyAll() metodunu çağırdıqda yenidən oyadılır.
+
+   3) sleep --> verilen vaxt qədər gözlədir thread-i.
+   4) yiled --> bu metod çağrıldıqda cari thread öz növbəsini digər thread-ə ötürürü.
+
 
 
