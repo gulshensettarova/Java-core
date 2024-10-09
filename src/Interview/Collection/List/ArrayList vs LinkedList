@@ -1,0 +1,20 @@
+1. ArrayList və LinkedList Arasındakı Yaddaş Təşkili
+    ArrayList-də bütün elementlər bir-birinin ardınca, yəni ardıcıl yaddaş bloklarında saxlanılır.
+    Məsələn, əgər ArrayList-də birinci element müəyyən yaddaş ünvanındadırsa, ikinci element birinci elementdən dərhal sonra gələn yaddaş ünvanında saxlanılır.
+    Bu ardıcıllıq CPU və sistem yaddaşı üçün çox əlverişlidir, çünki eyni yaddaş səhifəsində olan elementlərə giriş daha sürətlidir və səmərəli olur.
+    CPU cache-i bu cür ardıcıl verilənləri çox sürətli şəkildə işləyə bilir.
+
+    LinkedList-də isə elementlər bir-biri ilə əlaqəli göstəricilər vasitəsilə (pointer) bağlı olur,
+    amma bu göstəricilər elementlərin yaddaşda harada yerləşdiyini bildirmir. Hər bir element (və ya düyün, "node") öz növbəti və
+    əvvəlki elementinə (düyünə) göstərən göstəricilərlə saxlanılır. Ancaq həmin elementlərin yaddaşda harda yerləşdiyi öncədən məlum deyil və
+    onlar yaddaşda dağınıq şəkildə yerləşə bilərlər. Yəni, hər element fərqli yaddaş səhifələrində yerləşə bilər.
+
+
+2. CPU Cache-in Səmərəsiz İstifadəsi
+    CPU cache yaddaşın kiçik bir hissəsini tez-tez istifadə olunan verilənləri daha sürətli oxumaq üçün saxlayır.
+    Bu, verilənlər ardıcıl yaddaşda olduqda səmərəli işləyir. Məsələn, bir element oxunduqda, onun qonşu elementləri də CPU cache-ə yüklənir.
+    ArrayList-də elementlər ardıcıl saxlanıldığı üçün, CPU cache bu elementləri tez bir zamanda əldə edə bilir.
+
+    LinkedList-də elementlər yaddaşda dağınıq olduğuna görə, CPU hər bir elementi əldə etmək üçün fərqli yaddaş səhifələrinə müraciət etməli olur.
+    Bu, cache miss (keş səhvi) adlanan vəziyyət yaradır, yəni CPU-nun cache-də element tapa bilməməsi nəticəsində sistem yaddaşına (RAM) müraciət etməsi lazım olur.
+    Bu, əlavə vaxt və performans itkilərinə səbəb olur.

@@ -1,0 +1,15 @@
+ArrayList Java-da yalnız obyektləri saxlaya bilər, primitiv tipləri birbaşa saxlaya bilməz.
+Java-nın primitiv tipləri olan int, char, double, və s. kimi tipləri ArrayList-də istifadə etmək mümkün deyil.
+Bunun yerinə, Java avtomatik olaraq primitiv tipləri onların wrapper siniflərinə (məsələn, int üçün Integer, double üçün Double) çevirməlidir.
+Bu çevrilmə autoboxing adlanır.
+
+Primitiv tipdən obyektə və obyektlərdən primitiv tiplərə avtomatik çevrilmə prosesi əlavə vaxta və yaddaşa ehtiyac duyur.
+Bu, performansa mənfi təsir göstərir:
+
+ArrayList<Integer> numbers = new ArrayList<>();
+numbers.add(10);  // Autoboxing baş verir: int -> Integer
+int num = numbers.get(0);  // Unboxing baş verir: Integer -> int
+
+
+Primitiv tiplər (məsələn, int) daha az yaddaş tutur, lakin onların wrapper sinifləri (məsələn, Integer) daha çox yaddaş tələb edir.
+Hər bir primitiv tip üçün əlavə metadata saxlanıldığından yaddaş istifadəsi artar, bu isə böyük həcmli verilənlərdə performans problemlərinə və yaddaşın daha çox istifadə olunmasına səbəb ola bilər.

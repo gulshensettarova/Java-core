@@ -1,0 +1,25 @@
+1) Sual-1 - Bu yazılışlardan hansı doğrudur
+
+long y = 123_456_L;
+long z = _123_456L;
+float f1 = 123_.345_667F;
+float f2 = 123_345_667F;
+
+a) long y = 123_456_L;
+        Bu səhvdir. Underscore (_) yalnız rəqəmlərin arasında istifadə oluna bilər.
+        L (long tipini göstərən hərf) rəqəm olmadığı üçün 123_456_L sintaksis xətası verir.
+        Doğru yazılış belə olardı:
+        long y = 123_456L;
+b) long z = _123_456L;
+        Bu da yanlışdır, çünki bir rəqəmin əvvəlində underscore (_) istifadə edilə bilməz.
+        Doğru sintaksis belə olardı:
+        long z = 123_456L;
+
+c) float f1 = 123_.345_667F;
+        Bu da yanlışdır, çünki onluq nöqtənin önündə və ya arxasında underscore (_) istifadə edilə bilməz.
+        Doğru yazılış belə olardı:
+        float f1 = 123.345_667F;
+d) float f2 = 123_345_667F;
+         Bu düzgün bir sintaksisdir. Underscore (_) rəqəmlərin arasında sərbəst şəkildə istifadə oluna bilər
+         və F float tipini göstərir
+

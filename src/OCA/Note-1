@@ -21,3 +21,9 @@ qeyd-1 : toString() metodu StringBuilder-i string-ə çevirir.
      sb.toString().equals(s.toString()) ---> true (Çünki tostring() metodu ile her ikisi string-e cevirilib.
      equals metodu da String class-i ucun override olunmur bir metoddur, iki deyisenin deyerlerini muqayise edir)
 
+ --------------------------------------------------------------------------------
+ Interfeyslərdəki dəyişənlər avtomatik olaraq public, static, və final olur.
+     int type = 0;  // Bu, interfeysdəki statik və final bir dəyişəndir.
+     public static final int type=0 //yuxardaki yazilisla eynidir
+
+
