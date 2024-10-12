@@ -1,0 +1,20 @@
+1. AVL Ağacı Nədir?
+AVL ağacı balanslaşdırılmış bir ikili axtarış ağacıdır (binary search tree). Bu ağacın əsas məqsədi, axtarışın, əlavə etmənin və silmənin həmişə balanslı şəkildə həyata keçirilməsini təmin etməkdir. Yəni, ağacın sol və sağ tərəfi arasında hündürlük fərqi böyük olmadıqda, axtarış daha tez olur.
+
+Misal: Təsəvvür edin ki, bir kitabxanada kitablar rəflərdə yerləşdirilib. Rəflər arasında bərabər sayda kitab varsa, axtardığınız kitabı tapmaq daha asan olur. Ancaq bəzi rəflərdə çox, bəzilərində az kitab varsa, kitabı tapmaq üçün çox vaxt sərf edə bilərsiniz. AVL ağacı hər dəfə kitab əlavə edildikcə və ya çıxarıldıqca rəfləri yenidən balanslaşdırır ki, kitablar həmişə bərabər bölünsün və siz kitabı tez tapa biləsiniz.
+
+Axtarış necə işləyir: Ağacın kökündən başlayırıq və axtardığımız rəqəmi düyünlərlə müqayisə edirik. Əgər axtardığımız dəyər cari düyündən kiçikdirsə, sol tərəfə, böyükdürsə, sağ tərəfə keçirik. Bu şəkildə gedərək istədiyimiz dəyəri tapırıq.
+
+Vaxt sərfi: Həmişə balanslı olduğu üçün axtarış daha sürətli olur (O(log n)).
+
+
+
+
+2. Red-Black Ağacı Nədir?
+Red-Black ağacı da bir növ balanslaşdırılmış ikili axtarış ağacıdır. AVL ağacına bənzəyir, amma balansı saxlamaq üçün fərqli bir yol istifadə edir. Bu ağacda hər düyün ya qırmızı, ya da qara rəngdədir. Ağacın balansı, düyünlərin rənglərinə görə qorunur. Əlavə və ya silmə zamanı ağacda rənglər dəyişdirilir və bəzi hallarda düyünlər rotasiya edilir ki, balanslı qalsın.
+
+Misal: Yenə bir kitabxana misalını götürək. Bu dəfə kitab rəflərində kitablar var, amma rəflərin rəngləri var – qırmızı və qara. Kitab əlavə və ya silindikdə, rəflərin rəngləri dəyişir və bəzən rəflərin yerləri dəyişir ki, hər şey qaydasında olsun. Red-Black ağacı da əlavə və silmə zamanı ağacın balansını bu şəkildə qoruyur.
+
+Axtarış necə işləyir: Axtarış yenə binary search kimidir. Yəni, sol və sağ tərəfdə axtarışa davam edirik. Ağacın balansı rənglərə əsaslandığı üçün, bu proses həmişə optimal olur.
+
+Vaxt sərfi: Bu ağac da balanslı olduğu üçün axtarış çox sürətlidir (O(log n)).
