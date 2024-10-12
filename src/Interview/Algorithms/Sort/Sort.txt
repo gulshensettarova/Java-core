@@ -25,4 +25,26 @@
 
   -->  Time complexity - O(n^2)
 4. Merge Sort --->
-5. Quick Sort --->
+                     9 8 5 7 3 1
+                        / \
+                       /   \
+                   9 8 5    7 3 1
+       divide       /\        /\  divide
+                   /  \      /  \
+                 98    5    73   1
+                 /\    |    /\   |
+                /  \   |   /  \  |
+                9   8  |   7  3  |
+                \  /   |   \  /  | merge
+                 \/    |    \/   |
+                 89    |     37  |
+                  \    |      \  |
+                   \  /        \ |
+                    589         137
+                     \          /
+                      \        /  merge
+                     1 3 5 7 8 9
+
+  -->  Time complexity O(n log n)
+5. Quick Sort ---> Quick Sort-un iş prinsipi siyahını seçilmiş bir pivot (mərkəz) element ətrafında iki hissəyə bölərək hər iki hissəni ayrı-ayrılıqda rekursiv olaraq sıralamaqdır.
+  -->  Time complexity O(n log n)
