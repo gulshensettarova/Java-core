@@ -1,0 +1,28 @@
+1. Bubble Sort ---> Hər iterasiyada qonşu elementlər müqayisə olunur və yerləri dəyişdirilir
+  -->  Time complexity - O(n^2)
+
+2. Selection Sort ---> Hər iterasiyada minimum element tapılır və cari elementlə yeri dəyişdirilir
+       Məsələn: [7,5,10,4,8,1]
+       Burada ilk iterasiyada 7 elementi durur. 0-5 -ci indexlər üzrə minimum element axtarılır və 7 ilə yeri dəyişdirilir
+       [1,5,10,4,8,7]
+       Növbəti iterasiyada 5 gəlir. 1-5-ci indexlər üzrə minimum element taplır və 5 ilə yeri dəyişdirili:
+       [1,4,10,5,8,7]
+       Növbəti iterasiyada 10 gəlir. 2-5-ci indexlər üzrə minimum element taplır və 10 ilə yeri dəyişdirili:
+       [1,4,5,10,8,7]
+       Bu formada iterasiya sona qədər davam edir
+  -->  Time complexity - O(n^2)
+
+3. Insertion Sort ---> Iterasiya boyu hər bir element özündən əvvəlki elementlərlə müqayisə olunur və uyğun yerdə yerləşdirilir:
+   Məsələn: [14, 5, 16, 7, 18, 9]
+   iterasiya 5-dən başlayacaq.5 14-lə müqayisə olunur və yeri dəyişdirilir:
+    1) [5,14,16,7,18,9]
+     Daha sonra 16 özündən əvvəlki ədədlərlə yəni 1 və 14-lə müqayisə olunur, sıra doğru olduğuna görə yerdəyişmə baş vermir
+    2) [5,14,16,7,18,9]
+     Daha sonra 7 özündən əvvəlki ədədlərlə yəni 1 və 14 və 16- ilə müqayisə olunur və 5 ilə 14 arasında yerləşdirilir
+    3) [5,7,14,16,18,9]
+    4) [5,7,14,16,18,9]
+    5) [5,7,9,14,16,18]
+
+  -->  Time complexity - O(n^2)
+4. Merge Sort --->
+5. Quick Sort --->
