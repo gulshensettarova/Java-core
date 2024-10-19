@@ -1,0 +1,39 @@
+----> java-ci.yml faylı (confiqurasiya faylı)
+
+    CI/CD üçün konfiqurasiya faylı, kodun GitHub-a push edildikdən sonra hansı addımların avtomatik həyata keçirilməsini təyin edir.
+    Bu fayllar adətən .yml (YAML) formatında yazılır və layihənin qovluğunda (məsələn, GitHub-da .github/workflows qovluğunda) yerləşdirilir.
+
+----> CI/CD pipeline
+     Ardıcıl addımlardan ibarətdir və repoya əlavə edilən kodun test edilməsindən deploy edilməsinə qədər olan prossesləri avtomatlaşdırır.
+      CI/CD pipeline-də aşağıdakı mərhələlər ola bilər:
+      Build: Kodun kompilyasiya edilməsi.
+      Test: Kodun avtomatik testlərlə yoxlanması.
+      Deploy: Kodun müəyyən bir mühitə (staging və ya production) yerləşdirilməsi.
+
+
+----> CI (Continuous Integration)  - Məsələn biz javada yazdığımız kodları main branch-ə push edirik. Bu zaman bu kodların
+                                     yazdığımız Unit testlər vasitəsilə avtomatik test olunmasını CI təmin edir.Kodu push etdikdə CI/CD
+                                     avtomatik işə düşür, bunu da təmin edən java-ci.yml faylıdır. orda yazdığımız
+                                     on:branch:push:-master -main əmrləri master və ya main brach-lərinə  push edilən zaman avtomatik olaraq bu faylın içindəki
+                                     step-lərin avtomatik işə düşməsini təmin edir.(Qeyd java.ci.yml faylinde butun confiqurasiya kodlari qeyd olunub. Bu fayl github/workflows qovluğunda olur.)
+                                     Unit testlər uğursuz olarsa bununla bağlı m'lumat verir. Əks halda isə (testlər uğurla yekunlaşdığı halda)
+                                     build prossesi başlayır. Dependecy-lər yüklənir və layihə .jar və ya .war genişlənməli paket halına gətirilir.
+                                     Əgər bu prossesdədə hər hansı bir problem yaranmasa CI prossesləri yekunlaşmış sayılır.
+----> CD (Continuous Delivery və ya Continuous Deployment ) -
+                               --   Continuous Delivery mərhələsində, layihənin son versiyası avtomatik olaraq test və ya stage mühitinə yerləşdirilir.
+                               --   Continuous Deployment mərhələsində isə, kodun son versiyası avtomatik olaraq production mühitinə yerləşdirilir (yəni, istifadəçilər artıq bu versiyadan istifadə edə bilirlər).
+
+                               Deploy Prosesindən Sonra:
+                               Deployment uğurlu olduqda, Cİ/CD sistemi sənə geri bildirim göndərir (məsələn, e-mail və ya GitHub bildirişi).
+
+Qısaca:
+Kod yazılır →
+         GitHub-a push edilir →
+                     CI/CD sistemi işə düşür →
+                                 Testlər həyata keçirilir →
+                                                    Kod build olunur → Uğurlu olarsa deployment edilir.
+
+
+
+
+

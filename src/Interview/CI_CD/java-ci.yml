@@ -1,0 +1,82 @@
+name: Java CI/CD Workflow  # Workflow faylının adını göstərir.
+
+# Workflow-un hansı hallarda işə düşəcəyini təyin edirik (məsələn, hər dəfə kod push edildikdə).
+on:
+  push:
+    branches:
+      - master
+      - main
+
+# İş axınını təyin edirik:
+jobs:
+  build:
+    # Bu işin hansı əməliyyat sistemində işləyəcəyini seçirik:
+    runs-on: ubuntu-latest
+
+    # Adımları təyin edirik:
+    steps:
+      # İlk addım: Repository-dən kodu klonlamaq (checkout):
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # İkinci addım: Java 11 quraşdırmaq (və ya istifadə edilən digər Java versiyası):
+      - name: Set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+
+      # Üçüncü addım: Layihənin asılılıqlarını yükləmək və build etmək:
+      - name: Build with Maven
+        run: mvn clean install
+
+      # Dördüncü addım: Testləri işə salmaq:
+      - name: Run tests
+        run: mvn test
+
+      # Beşinci addım: Docker image yaratmaq:
+      - name: Build Docker image
+        run: docker build -t my-docker-repo/my-java-app:${{ github.sha }} .
+
+      # Altıncı addım: Docker Hub-a login olmaq:
+      - name: Login to Docker Hub
+        run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
+
+      # Yeddinci addım: Docker image-i Docker Hub-a yükləmək:
+      - name: Push Docker image to Docker Hub
+        run: docker push my-docker-repo/my-java-app:${{ github.sha }}
+
+      # Aşağıdakı addımlar Continuous Deployment (CD) hissəsidir.
+
+      # Səkkizinci addım: Deployment mühitinə giriş etmək (məsələn, SSH ilə serverə qoşulmaq):
+      - name: SSH to deployment server
+        uses: appleboy/ssh-action@v0.1.8
+        with:
+          host: ${{ secrets.SERVER_HOST }}  # Serverin IP ünvanı və ya host adı.
+          username: ${{ secrets.SERVER_USERNAME }}  # SSH istifadəçi adı.
+          password: ${{ secrets.SERVER_PASSWORD }}  # SSH istifadəçi şifrəsi (və ya SSH açarı).
+          script: |
+            #Yaradılan yeni Docker image-i serverə yükləyirik:
+            docker pull my-docker-repo/my-java-app:${{ github.sha }}
+            #Əvvəlki konteyneri dayandırırıq və silirik:
+            docker stop my-java-app || true && docker rm my-java-app || true
+            #Yeni image ilə konteyneri işə salırıq:
+            docker run -d --name my-java-app -p 80:8080 my-docker-repo/my-java-app:${{ github.sha }}
+
+      # Bu addımda:
+      # - `docker pull` əmri ilə serverə yeni Docker image-i çəkirik.
+      # - `docker stop` və `docker rm` əmrləri ilə əvvəlki işləyən konteyneri dayandırır və silirik.
+      # - `docker run` əmri ilə yeni image-dən istifadə edərək tətbiqi konteynerdə işə salırıq.
+      # - `-d` konteynerin arxa planda işləməsini təmin edir.
+      # - `-p 80:8080` port xəritələndirməsini göstərir (serverin 80-ci portunu konteynerin 8080-ci portuna yönləndirir).
+
+      # Bu addımlar nəticəsində Java tətbiqinin yeni versiyası avtomatik olaraq serverə yüklənir və istifadəyə verilir.
+
+      #Qeyd :
+
+      #run:
+        #docker build -t my-docker-repo/my-java-app:${{ github.sha }} .:
+      #Bu addım docker build əmrini işə salır və Docker image yaradır.
+      #-t: Image-ə ad və etiket (tag) verir.
+      #my-docker-repo/my-java-app: Docker image-in adı.
+      #${{ github.sha }}: GitHub commit-inin unikal identifikatoru olan sha dəyəri. Bu, image-in hər dəfə unikal olması və fərqli versiyalara sahib olması üçün istifadə edilir.
+      #.: Dockerfile-in layihə kök qovluğunda olduğunu göstərir.
